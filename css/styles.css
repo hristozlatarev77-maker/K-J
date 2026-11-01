@@ -183,10 +183,14 @@ code {
 
 .brand-logo {
   display: block;
-  width: 3.25em;
-  height: 3.25em;
-  object-fit: contain;
+  width: 3.35em;
+  height: 3.35em;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  border: 0;
   background: transparent;
+  box-shadow: none;
   vertical-align: middle;
 }
 
@@ -916,11 +920,14 @@ legend {
 }
 
 .footer-brand img {
-  width: 3.4em;
-  height: 3.4em;
+  width: 3.5em;
+  height: 3.5em;
   border-radius: 50%;
   object-fit: cover;
-  border: 1px solid rgba(240, 196, 190, 0.4);
+  object-position: center;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
   vertical-align: middle;
 }
 
