@@ -102,6 +102,98 @@
     return ALLOWED_IMAGE_TYPES[file.type] === true;
   }
 
+  var referencesInput = document.getElementById("references");
+  var referencesPreview = document.getElementById("references-preview");
+  var previewObjectUrls = [];
+
+  function clearReferencePreview() {
+    for (var i = 0; i < previewObjectUrls.length; i++) {
+      try {
+        URL.revokeObjectURL(previewObjectUrls[i]);
+      } catch (err) {
+        /* ignore */
+      }
+    }
+    previewObjectUrls = [];
+    if (referencesPreview) {
+      referencesPreview.innerHTML = "";
+      referencesPreview.hidden = true;
+    }
+  }
+
+  function renderReferencePreview(fileList) {
+    clearReferencePreview();
+    if (!referencesPreview) {
+      return;
+    }
+    var files = fileList ? Array.prototype.slice.call(fileList, 0) : [];
+    if (!files.length) {
+      return;
+    }
+
+    var shown = files.slice(0, MAX_REFERENCE_FILES);
+    var countText =
+      files.length > MAX_REFERENCE_FILES
+        ? "Избрани: " +
+          files.length +
+          " файла (ще се приемат най-много " +
+          MAX_REFERENCE_FILES +
+          ")"
+        : "Избрани: " + files.length + (files.length === 1 ? " файл" : " файла");
+
+    var countEl = document.createElement("p");
+    countEl.className = "file-preview-count";
+    countEl.textContent = countText;
+    referencesPreview.appendChild(countEl);
+
+    var list = document.createElement("ul");
+    list.className = "file-preview-list";
+
+    for (var i = 0; i < shown.length; i++) {
+      var file = shown[i];
+      var item = document.createElement("li");
+      item.className = "file-preview-item";
+
+      var thumb = document.createElement("img");
+      thumb.className = "file-preview-thumb";
+      thumb.alt = "";
+      thumb.width = 96;
+      thumb.height = 96;
+
+      if (isAllowedImageFile(file)) {
+        var url = URL.createObjectURL(file);
+        previewObjectUrls.push(url);
+        thumb.src = url;
+      } else {
+        thumb.className += " is-invalid-file";
+        thumb.removeAttribute("src");
+        thumb.alt = "Невалиден файл";
+      }
+
+      var nameEl = document.createElement("span");
+      nameEl.className = "file-preview-name";
+      nameEl.textContent = file.name || "файл";
+      nameEl.title = file.name || "";
+
+      item.appendChild(thumb);
+      item.appendChild(nameEl);
+      list.appendChild(item);
+    }
+
+    if (files.length > MAX_REFERENCE_FILES) {
+      var more = document.createElement("li");
+      more.className = "file-preview-item";
+      more.innerHTML =
+        '<span class="file-preview-name">+ още ' +
+        (files.length - MAX_REFERENCE_FILES) +
+        " (над лимита)</span>";
+      list.appendChild(more);
+    }
+
+    referencesPreview.appendChild(list);
+    referencesPreview.hidden = false;
+  }
+
   applyDateMin();
 
   form.addEventListener("input", function (event) {
@@ -117,13 +209,23 @@
 
   form.addEventListener("change", function (event) {
     var field = event.target;
-    if (field && field.type === "file") {
+    if (field && field.id === "references") {
       var group = field.closest(".form-group");
       if (group && group.classList.contains("is-invalid")) {
         clearError(group);
       }
+      renderReferencePreview(field.files);
+    } else if (field && field.type === "file") {
+      var groupFile = field.closest(".form-group");
+      if (groupFile && groupFile.classList.contains("is-invalid")) {
+        clearError(groupFile);
+      }
     }
   });
+
+  if (referencesInput) {
+    renderReferencePreview(referencesInput.files);
+  }
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();
