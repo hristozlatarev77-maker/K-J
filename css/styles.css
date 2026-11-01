@@ -9,8 +9,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap");
 
 :root {
-  --ink: #1c1416;
-  --ink-soft: #5a454a;
+  --ink: #140e10;
+  --ink-soft: #3a2a2e;
   --cream: #faf4f2;
   --cream-deep: #f3e4e0;
   --blush: #f0d6d2;
@@ -21,7 +21,7 @@
   --shadow: rgba(28, 20, 22, 0.1);
   --max: 1120px;
   --nav-h: 4.5em;
-  --text: 1rem;
+  --text: 1.0625rem;
 }
 
 *,
@@ -41,7 +41,8 @@ body {
   margin: 0;
   font-family: Manrope, "Segoe UI", sans-serif;
   font-size: var(--text);
-  line-height: 1.6;
+  line-height: 1.65;
+  letter-spacing: -0.01em;
   color: var(--ink);
   background: transparent;
   min-height: 100%;
@@ -76,9 +77,10 @@ h1,
 h2,
 h3 {
   font-family: "Cormorant Garamond", Georgia, serif;
-  line-height: 1.15;
+  line-height: 1.18;
   margin: 0 0 0.45em;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: -0.015em;
   color: var(--ink);
 }
 
@@ -117,7 +119,7 @@ blockquote {
   margin: 1.25em 0;
   padding: 0.85em 1.1em;
   border-left: 4px solid var(--rose);
-  background: rgba(255, 255, 255, 0.66);
+  background: rgba(255, 255, 255, 0.79);
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: 1.2em;
   font-style: italic;
@@ -225,7 +227,8 @@ code {
 .site-nav a {
   text-decoration: none;
   color: var(--ink);
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   padding: 0.35em 0;
   border-bottom: 2px solid transparent;
 }
@@ -370,16 +373,18 @@ code {
 .page-atmosphere {
   position: relative;
   z-index: 1;
-  background: rgba(250, 244, 242, 0.46);
+  background: rgba(250, 244, 242, 0.55);
   transition: background 0.2s linear;
 }
 
 .hero-brand {
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(2.4em, 6.5vw, 4.2em);
+  font-size: clamp(2.55em, 6.8vw, 4.35em);
   font-weight: 700;
   margin: 0 0 0.15em;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75), 0 2px 14px rgba(250, 244, 242, 0.9);
   animation: rise-in 0.9s ease both;
 }
 
@@ -388,9 +393,13 @@ code {
 }
 
 .hero-lead {
-  font-size: 1.12em;
+  font-size: 1.2em;
   max-width: 34em;
-  color: var(--ink-soft);
+  font-weight: 600;
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7), 0 2px 12px rgba(250, 244, 242, 0.85);
   animation: rise-in 0.9s ease 0.18s both;
 }
 
@@ -452,8 +461,11 @@ code {
 }
 
 .section-head p {
-  color: var(--ink-soft);
+  color: var(--ink);
+  font-weight: 500;
+  font-size: 1.05em;
   max-width: 40em;
+  letter-spacing: -0.01em;
 }
 
 .article-panel {
@@ -483,8 +495,9 @@ code {
 }
 
 .float-figure figcaption {
-  font-size: 0.85em;
-  color: var(--ink-soft);
+  font-size: 0.92em;
+  font-weight: 600;
+  color: var(--ink);
   margin-top: 0.4em;
 }
 
@@ -494,8 +507,9 @@ code {
 
 .inline-meta {
   margin: 1em 0;
-  color: var(--ink-soft);
-  font-size: 0.95em;
+  color: var(--ink);
+  font-size: 1em;
+  font-weight: 500;
 }
 
 .inline-meta .meta-icon {
@@ -562,7 +576,7 @@ code {
 
 .scroll-strip {
   border: 1px solid rgba(196, 139, 139, 0.45);
-  background: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.94);
   max-height: 9.5em;
   overflow: auto;
   padding: 0.9em 1em;
@@ -582,7 +596,7 @@ code {
 .gallery-grid li {
   list-style: none;
   margin: 0;
-  background: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.94);
   border: 1px solid rgba(196, 139, 139, 0.45);
   overflow: hidden;
   position: relative;
@@ -608,7 +622,14 @@ code {
 .gallery-grid .cap h2,
 .gallery-grid .cap h3 {
   margin: 0 0 0.25em;
-  font-size: 1.2em;
+  font-size: 1.28em;
+  font-weight: 700;
+}
+
+.gallery-grid .cap p {
+  color: var(--ink);
+  font-weight: 500;
+  font-size: 0.98em;
 }
 
 .gallery-filter {
@@ -685,7 +706,7 @@ code {
   margin: 1.5em 0;
   padding: 1em;
   border: 1px dashed var(--rose);
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.72);
 }
 
 .pen-line {
@@ -752,7 +773,7 @@ code {
 }
 
 .form-panel {
-  background: rgba(255, 255, 255, 0.86);
+  background: rgba(255, 255, 255, 1.0);
   border: 1px solid rgba(196, 139, 139, 0.45);
   padding: 1.5em;
 }
@@ -769,7 +790,8 @@ code {
 
 .form-group .hint {
   display: block;
-  font-size: 0.85em;
+  font-size: 0.9em;
+  font-weight: 500;
   color: var(--ink-soft);
   margin-top: 0.25em;
 }
@@ -783,9 +805,11 @@ code {
 .form-group select,
 .form-group textarea {
   width: 100%;
-  padding: 0.6em 0.7em;
+  padding: 0.65em 0.75em;
   font: inherit;
-  border: 1px solid rgba(90, 69, 74, 0.45);
+  font-weight: 500;
+  color: var(--ink);
+  border: 1px solid rgba(90, 69, 74, 0.55);
   background: var(--white);
 }
 
@@ -1170,7 +1194,7 @@ legend {
 
 .order-auth-gate {
   border: 1px dashed var(--rose);
-  background: rgba(255, 255, 255, 0.84);
+  background: rgba(255, 255, 255, 1.0);
   padding: 0.9em 1em;
   margin-bottom: 1.1em;
 }

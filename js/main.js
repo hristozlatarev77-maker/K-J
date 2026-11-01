@@ -66,7 +66,7 @@
     }
     for (var i = 0; i < pageEls.length; i++) {
       pageEls[i].style.background =
-        "rgba(250, 244, 242, " + (0.48 - progress * 0.22) + ")";
+        "rgba(250, 244, 242, " + (0.58 - progress * 0.2) + ")";
     }
   }
 
