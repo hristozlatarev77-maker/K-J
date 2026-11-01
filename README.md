@@ -1,12 +1,11 @@
-# K&J Art — курсов сайт
+# K&J Art
 
-Статичен многостраничен сайт на **K&J Art** (портрети, карикатури, спомени) за курса „Увод в уеб програмирането“ (ФМИ).  
-Интерфейс на български. Технологии: HTML5, CSS3, vanilla JavaScript.  
-Визуална идентичност: мек cream-pink фон, dusty rose / rose-gold акценти, черн текст; лого и реални поръчки в `assets/brand/`.
+Сайт на ателие **K&J Art** — портрети, карикатури и спомени по поръчка.  
+Интерфейс на български. Статични страници с HTML, CSS и JavaScript.
+
+Визуална идентичност: мек cream-pink фон, dusty rose / rose-gold акценти; лого и портфолио в `assets/brand/`.
 
 ## Публичен адрес (GitHub Pages)
-
-Целеви URL след включване на Pages:
 
 **https://hristozlatarev77-maker.github.io/K-J/**
 
@@ -20,11 +19,11 @@
 
 | Файл | Съдържание |
 |------|------------|
-| `index.html` | Начало — пълен фон `site-background.jpg`, лого, статии, CSS анимация (`rise-in`) |
-| `gallery.html` | Галерия с реални клиентски поръчки + филтър |
-| `about.html` | За K&J и процеса |
-| `contact.html` | Форма за поръчка (изисква вход) + JS валидация |
-| `js/auth.js` | Регистрация / вход / изход (localStorage) |
+| `index.html` | Начало — бранд фон, лого, представяне |
+| `gallery.html` | Галерия с клиентски поръчки + филтър |
+| `about.html` | За ателието, процес, видео и звук |
+| `contact.html` | Форма за поръчка (с вход/регистрация) |
+| `js/auth.js` | Регистрация / вход / изход |
 
 ## Как да отворите локално
 
@@ -37,34 +36,9 @@ python3 -m http.server 8080
 ## Структура
 
 ```
-css/styles.css          — бранд тема, breakpoints, layout свойства
-js/main.js              — мобилно меню, филтър на галерията
-js/form-validation.js   — клиентска валидация
-assets/brand/           — лого, фон, примерни поръчки
+css/styles.css          — тема, breakpoints, layout
+js/main.js              — меню, филтър на галерията
+js/form-validation.js   — валидация на формата за поръчка
+assets/brand/           — лого, фон, портфолио
 assets/media/           — видео (mp4) и аудио (mp3/wav)
 ```
-
-## Изисквания → къде са покрити
-
-1. **Семантични HTML5 тагове** (`header`, `nav`, `article`, `aside`, `section`, `footer`) — на всяка страница.
-2. **Responsive + breakpoints** (~360, ~768, ~992/1024, ~1200) — в `css/styles.css`.
-3. **Съдържание** — текст, графика (лого/поръчки); звук и видео на `about.html`; CSS анимация на началния екран (`rise-in`).
-4. **Формуляр + JS валидация** — `contact.html` + `js/form-validation.js`.
-5. **CSS layout свойства** — `display`, `visibility`, `position`, `float`, `clear`, `opacity`, `overflow`, `vertical-align`.
-6. **Стилове за съдържание** — типография, цветове, линкове, списъци, изображения.
-7. **Хибридни единици** — `px`, `em`, `%` + `@media`.
-8. **W3C валидация** — стъпките по-долу.
-
-## W3C валидация (HTML5 и CSS3)
-
-- HTML: <https://validator.w3.org/>
-- CSS: <https://jigsaw.w3.org/css-validator/>
-- QA инструменти: <https://www.w3.org/QA/Tools/>
-
-1. Качете или посочете URI за `index.html`, `gallery.html`, `about.html`, `contact.html`.
-2. Качете `css/styles.css` в CSS валидатора.
-3. `@import` за Google Fonts е валиден; офлайн качване може да предупреди за външния ресурс.
-
-## Лиценз / учебна цел
-
-Учебни материали; бранд активи и примерни поръчки от K&J Art за демонстрация в курса.

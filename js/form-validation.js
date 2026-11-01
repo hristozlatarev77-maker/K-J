@@ -416,15 +416,15 @@
       references && references.files ? references.files.length : 0;
     if (success) {
       success.textContent =
-        "Благодарим! Поръчката е приета (демо)." +
-        (fileCount ? " Качени референции: " + fileCount + "." : "") +
-        (promoApplied ? promoNote : "") +
-        " Няма сървърно изпращане.";
+        "Благодарим! Получихме поръчката ви и ще се свържем скоро." +
+        (fileCount ? " Получени референции: " + fileCount + "." : "") +
+        (promoApplied ? promoNote : "");
       success.classList.add("is-visible");
       success.focus();
     }
     form.reset();
     applyDateMin();
+    clearReferencePreview();
     if (promoInput) {
       promoInput.dataset.applied = "";
       delete promoInput.dataset.finalPrice;
