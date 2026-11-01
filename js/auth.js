@@ -347,6 +347,7 @@
     overlay.classList.add("is-open");
     overlay.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
+    setCopyStatus("");
     var continueBtn = document.getElementById("promo-continue");
     if (continueBtn) {
       continueBtn.focus();
@@ -381,6 +382,84 @@
         loginForm.password.value = "";
         loginForm.password.focus();
       }
+    }
+  }
+
+  var copyStatusTimer = null;
+
+  function setCopyStatus(message) {
+    var status = document.getElementById("promo-copy-status");
+    var btn = document.getElementById("promo-copy-btn");
+    if (status) {
+      status.textContent = message || "";
+    }
+    if (btn) {
+      btn.classList.toggle("is-copied", !!message);
+    }
+    if (copyStatusTimer) {
+      clearTimeout(copyStatusTimer);
+      copyStatusTimer = null;
+    }
+    if (message) {
+      copyStatusTimer = setTimeout(function () {
+        if (status) {
+          status.textContent = "";
+        }
+        if (btn) {
+          btn.classList.remove("is-copied");
+        }
+        copyStatusTimer = null;
+      }, 1600);
+    }
+  }
+
+  function copyPromoCode() {
+    var codeField = document.getElementById("promo-code-field");
+    var code = (codeField && codeField.value ? codeField.value : PROMO_CODE).trim() || PROMO_CODE;
+
+    function onSuccess() {
+      setCopyStatus("Копирано");
+    }
+
+    function fallbackCopy() {
+      var input = codeField;
+      var created = false;
+      if (!input) {
+        input = document.createElement("input");
+        input.value = code;
+        input.setAttribute("readonly", "");
+        input.style.position = "fixed";
+        input.style.left = "-9999px";
+        document.body.appendChild(input);
+        created = true;
+      }
+      input.focus();
+      input.select();
+      try {
+        input.setSelectionRange(0, code.length);
+      } catch (err) {
+        /* ignore */
+      }
+      var ok = false;
+      try {
+        ok = document.execCommand("copy");
+      } catch (err2) {
+        ok = false;
+      }
+      if (created && input.parentNode) {
+        input.parentNode.removeChild(input);
+      }
+      if (ok) {
+        onSuccess();
+      } else {
+        setCopyStatus("Копирането не успя");
+      }
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(code).then(onSuccess).catch(fallbackCopy);
+    } else {
+      fallbackCopy();
     }
   }
 
@@ -492,6 +571,13 @@
     if (promoDoneBtn) {
       promoDoneBtn.addEventListener("click", function () {
         continueToLogin();
+      });
+    }
+
+    var promoCopyBtn = document.getElementById("promo-copy-btn");
+    if (promoCopyBtn) {
+      promoCopyBtn.addEventListener("click", function () {
+        copyPromoCode();
       });
     }
 
