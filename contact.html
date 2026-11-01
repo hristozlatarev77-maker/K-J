@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Контактна форма за идеи, въпроси и обратна връзка относно карикатурите.">
+  <title>Карикатури — Контакт</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Към съдържанието</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">Карика<span>тури</span></span>
+        <span class="brand-tag">ателие</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Меню</button>
+      <nav class="site-nav" id="primary-nav" aria-label="Главна навигация">
+        <ul>
+          <li><a href="index.html">Начало</a></li>
+          <li><a href="gallery.html">Галерия</a></li>
+          <li><a href="about.html">За карикатурата</a></li>
+          <li><a href="contact.html" aria-current="page">Контакт</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="page">
+    <section class="section" aria-labelledby="contact-title">
+      <header class="section-head">
+        <h1 id="contact-title">Контакт</h1>
+        <p>Изпратете идея за карикатура, въпрос към курса или обратна връзка. Формата се валидира с JavaScript в браузъра.</p>
+      </header>
+
+      <div class="contact-layout">
+        <article class="form-panel">
+          <h2>Форма за запитване</h2>
+          <form id="contact-form" action="#" method="post" novalidate>
+            <div class="form-group">
+              <label for="name">Име *</label>
+              <input type="text" id="name" name="name" autocomplete="name" required minlength="2" placeholder="напр. Мария Иванова">
+              <span class="error-msg" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Имейл *</label>
+              <input type="email" id="email" name="email" autocomplete="email" required placeholder="ime@example.com">
+              <span class="error-msg" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Телефон</label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+359 ...">
+              <span class="hint">По желание. Позволени: цифри, интервали, +, -, ().</span>
+              <span class="error-msg" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="age">Възраст</label>
+              <input type="number" id="age" name="age" min="12" max="120" step="1" placeholder="напр. 21">
+              <span class="error-msg" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="date">Желана дата за отговор</label>
+              <input type="date" id="date" name="date">
+              <span class="error-msg" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="website">Личен сайт / портфолио</label>
+              <input type="url" id="website" name="website" placeholder="https://...">
+              <span class="error-msg" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="topic">Тема *</label>
+              <select id="topic" name="topic" required>
+                <option value="">— изберете —</option>
+                <option value="idea">Идея за карикатура</option>
+                <option value="course">Въпрос по курса</option>
+                <option value="gallery">Галерия / медии</option>
+                <option value="other">Друго</option>
+              </select>
+              <span class="error-msg" role="alert"></span>
+            </div>
+
+            <fieldset class="requires-choice">
+              <legend>Предпочитан стил *</legend>
+              <div class="choice-row">
+                <label><input type="checkbox" name="style" value="political"> Политически</label>
+                <label><input type="checkbox" name="style" value="daily"> Битов</label>
+                <label><input type="checkbox" name="style" value="animals"> Животни</label>
+                <label><input type="checkbox" name="style" value="sport"> Спорт</label>
+              </div>
+              <span class="error-msg" role="alert"></span>
+            </fieldset>
+
+            <fieldset>
+              <legend>Как да се свържем</legend>
+              <div class="choice-row">
+                <label><input type="radio" name="channel" value="email" checked> Имейл</label>
+                <label><input type="radio" name="channel" value="phone"> Телефон</label>
+                <label><input type="radio" name="channel" value="either"> Без значение</label>
+              </div>
+            </fieldset>
+
+            <div class="form-group">
+              <label for="message">Съобщение *</label>
+              <textarea id="message" name="message" required minlength="10" placeholder="Опишете идеята или въпроса..."></textarea>
+              <span class="error-msg" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" id="consent" name="consent" value="yes" required>
+                Съгласявам се данните да се използват само за отговор на запитването. *
+              </label>
+              <span class="error-msg" role="alert"></span>
+            </div>
+
+            <button class="btn" type="submit">Изпрати</button>
+            <div id="form-success" class="form-success" tabindex="-1" role="status">
+              Благодарим! Формата е валидна. (Демонстрация — няма сървърно изпращане.)
+            </div>
+          </form>
+        </article>
+
+        <aside aria-label="Информация за контакт">
+          <div class="side-panel">
+            <h2>Ателие „Карикатури“</h2>
+            <p>Учебен сайт без реална администрация. Изпращането показва клиентска валидация.</p>
+            <ul>
+              <li>Имейл (учебен): cartoons@example.bg</li>
+              <li>Часове: понеделник–петък, 10:00–16:00</li>
+            </ul>
+            <img src="assets/images/card-daily.svg" width="600" height="450" alt="Битова карикатура">
+          </div>
+          <article class="article-card">
+            <h3>Типове полета във формата</h3>
+            <ul>
+              <li>text, email, tel, number, date, url</li>
+              <li>select, textarea</li>
+              <li>checkbox и radio</li>
+            </ul>
+          </article>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <strong>Карикатури</strong>
+        <p>Курсов проект — Увод в уеб програмирането, ФМИ.</p>
+      </div>
+      <nav aria-label="Връзки в долния колонтитул">
+        <ul>
+          <li><a href="index.html">Начало</a></li>
+          <li><a href="gallery.html">Галерия</a></li>
+          <li><a href="about.html">За карикатурата</a></li>
+        </ul>
+      </nav>
+      <p class="footer-meta">&copy; <span id="year">2026</span> Курсова работа</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/form-validation.js"></script>
+</body>
+</html>

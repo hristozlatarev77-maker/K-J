@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="Карикатура на художник">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#C5D8E8"/>
+      <stop offset="100%" stop-color="#E8D5C4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" fill="url(#sky)"/>
+  <ellipse cx="980" cy="120" rx="70" ry="70" fill="#F2C14E" opacity="0.9"/>
+  <!-- desk -->
+  <rect x="80" y="480" width="1040" height="160" fill="#6B4F3A"/>
+  <rect x="80" y="470" width="1040" height="20" fill="#8A6548"/>
+  <!-- paper -->
+  <rect x="320" y="300" width="420" height="280" fill="#F7F1E8" stroke="#1A1F24" stroke-width="6"/>
+  <!-- stick figure drawing on paper -->
+  <circle cx="530" cy="380" r="42" fill="none" stroke="#1A1F24" stroke-width="5"/>
+  <path d="M530 422 L530 500 M480 450 L580 450 M500 560 L530 500 L560 560" fill="none" stroke="#1A1F24" stroke-width="5" stroke-linecap="round"/>
+  <!-- oversized nose caricature -->
+  <path d="M520 390 Q560 410 525 425" fill="none" stroke="#E03C31" stroke-width="6"/>
+  <!-- artist head -->
+  <circle cx="820" cy="250" r="70" fill="#F0C7A8" stroke="#1A1F24" stroke-width="5"/>
+  <ellipse cx="800" cy="245" rx="8" ry="12" fill="#1A1F24"/>
+  <ellipse cx="845" cy="245" rx="8" ry="12" fill="#1A1F24"/>
+  <path d="M790 280 Q820 300 850 275" fill="none" stroke="#1A1F24" stroke-width="4"/>
+  <path d="M760 210 Q820 160 880 210" fill="none" stroke="#1A1F24" stroke-width="8"/>
+  <!-- body -->
+  <path d="M820 320 L820 430 M760 360 L820 340 L880 380" fill="none" stroke="#1A1F24" stroke-width="8" stroke-linecap="round"/>
+  <!-- pen -->
+  <line x1="880" y1="380" x2="700" y2="420" stroke="#1A1F24" stroke-width="6"/>
+  <polygon points="700,420 688,410 695,430" fill="#E03C31"/>
+  <text x="60" y="80" font-family="Georgia, serif" font-size="48" fill="#1A1F24" font-weight="700">Карикатури</text>
+  <text x="60" y="130" font-family="Arial, sans-serif" font-size="24" fill="#3A4650">линия, хумор, истина</text>
+</svg>

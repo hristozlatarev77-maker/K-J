@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" role="img" aria-label="Политическа карикатура">
+  <rect width="600" height="450" fill="#F4EFE6"/>
+  <rect x="20" y="20" width="560" height="410" fill="none" stroke="#1A1F24" stroke-width="4"/>
+  <circle cx="220" cy="180" r="70" fill="#F0C7A8" stroke="#1A1F24" stroke-width="4"/>
+  <ellipse cx="200" cy="175" rx="7" ry="10" fill="#1A1F24"/>
+  <ellipse cx="250" cy="175" rx="7" ry="10" fill="#1A1F24"/>
+  <path d="M195 210 Q220 230 250 205" fill="none" stroke="#1A1F24" stroke-width="3"/>
+  <ellipse cx="235" cy="195" rx="28" ry="18" fill="#E8A090" stroke="#1A1F24" stroke-width="3"/>
+  <rect x="170" y="250" width="100" height="120" fill="#2F5D8A" stroke="#1A1F24" stroke-width="4"/>
+  <!-- scales of justice oversized -->
+  <line x1="380" y1="120" x2="380" y2="320" stroke="#1A1F24" stroke-width="6"/>
+  <line x1="300" y1="140" x2="460" y2="140" stroke="#1A1F24" stroke-width="6"/>
+  <path d="M300 140 L270 220 L330 220 Z" fill="#D4A017" stroke="#1A1F24" stroke-width="3"/>
+  <path d="M460 140 L430 180 L490 180 Z" fill="#E03C31" stroke="#1A1F24" stroke-width="3"/>
+  <text x="40" y="400" font-family="Georgia, serif" font-size="28" fill="#1A1F24">Баланс?</text>
+</svg>

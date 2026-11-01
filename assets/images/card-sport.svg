@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" role="img" aria-label="Спортна карикатура">
+  <rect width="600" height="450" fill="#D9EAD3"/>
+  <circle cx="180" cy="220" r="55" fill="#F0C7A8" stroke="#1A1F24" stroke-width="4"/>
+  <circle cx="165" cy="210" r="6" fill="#1A1F24"/>
+  <circle cx="195" cy="210" r="6" fill="#1A1F24"/>
+  <path d="M160 240 Q180 255 200 235" fill="none" stroke="#1A1F24" stroke-width="3"/>
+  <path d="M180 275 L180 340 M140 300 L180 290 L230 250" fill="none" stroke="#1A1F24" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="280" cy="200" r="40" fill="#E03C31" stroke="#1A1F24" stroke-width="4"/>
+  <path d="M255 185 Q280 210 305 185 M255 215 Q280 190 305 215" fill="none" stroke="#fff" stroke-width="3"/>
+  <text x="60" y="60" font-family="Georgia, serif" font-size="26" fill="#1A1F24">Гол от дивана</text>
+  <text x="320" y="320" font-family="Arial, sans-serif" font-size="18" fill="#3A4650">„Аз бях треньорът!"</text>
+</svg>
