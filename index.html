@@ -25,11 +25,19 @@
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Меню</button>
       <nav class="site-nav" id="primary-nav" aria-label="Главна навигация">
-        <ul>
-          <li><a href="index.html" aria-current="page">Начало</a></li>
-          <li><a href="gallery.html">Галерия</a></li>
-          <li><a href="about.html">За нас</a></li>
-          <li><a href="contact.html">Контакт</a></li>
+        <ul class="nav-bar">
+          <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-toggle is-current" id="nav-pages-btn" aria-expanded="false" aria-controls="nav-pages-menu" aria-haspopup="true">
+              Страници
+              <span class="nav-dropdown-caret" aria-hidden="true"></span>
+            </button>
+            <ul class="nav-dropdown-menu" id="nav-pages-menu" hidden>
+              <li><a href="index.html" aria-current="page">Начало</a></li>
+              <li><a href="gallery.html">Галерия</a></li>
+              <li><a href="about.html">За нас</a></li>
+              <li><a href="contact.html">Контакт</a></li>
+            </ul>
+          </li>
           <li class="auth-nav-item" data-auth-guest>
             <button type="button" class="btn-auth" data-open-auth="login">Вход</button>
           </li>
@@ -160,11 +168,11 @@
     <div class="auth-dialog" role="dialog" aria-modal="true" aria-labelledby="auth-dialog-title">
       <button type="button" class="auth-close" id="auth-close" aria-label="Затвори">&times;</button>
       <div class="auth-tabs" role="tablist">
-        <button type="button" id="auth-tab-login" class="is-active" role="tab" aria-selected="true">Вход</button>
-        <button type="button" id="auth-tab-register" role="tab" aria-selected="false">Регистрация</button>
+        <button type="button" id="auth-tab-login" class="is-active" role="tab" aria-selected="true" aria-controls="auth-panel-login">Вход</button>
+        <button type="button" id="auth-tab-register" role="tab" aria-selected="false" aria-controls="auth-panel-register">Регистрация</button>
       </div>
 
-            <div id="auth-panel-login" class="auth-panel" role="tabpanel">
+            <div id="auth-panel-login" class="auth-panel" role="tabpanel" aria-labelledby="auth-tab-login">
         <h2 id="auth-dialog-title">Вход в K&amp;J Art</h2>
         <form id="login-form" action="#" method="post" novalidate>
           <div class="form-group">
@@ -181,7 +189,7 @@
         </form>
       </div>
 
-      <div id="auth-panel-register" class="auth-panel" role="tabpanel" hidden>
+      <div id="auth-panel-register" class="auth-panel" role="tabpanel" aria-labelledby="auth-tab-register" hidden>
         <h2>Регистрация</h2>
         <form id="register-form" action="#" method="post" novalidate>
           <div class="form-group">

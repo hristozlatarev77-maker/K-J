@@ -11,6 +11,42 @@
     });
   }
 
+  var dropdown = document.querySelector(".nav-dropdown");
+  var dropdownBtn = document.getElementById("nav-pages-btn");
+  var dropdownMenu = document.getElementById("nav-pages-menu");
+
+  function setDropdownOpen(open) {
+    if (!dropdown || !dropdownBtn || !dropdownMenu) {
+      return;
+    }
+    dropdown.classList.toggle("is-open", open);
+    dropdownBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    if (open) {
+      dropdownMenu.removeAttribute("hidden");
+    } else {
+      dropdownMenu.setAttribute("hidden", "");
+    }
+  }
+
+  if (dropdown && dropdownBtn && dropdownMenu) {
+    dropdownBtn.addEventListener("click", function (event) {
+      event.stopPropagation();
+      setDropdownOpen(dropdownBtn.getAttribute("aria-expanded") !== "true");
+    });
+
+    document.addEventListener("click", function (event) {
+      if (!dropdown.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        setDropdownOpen(false);
+      }
+    });
+  }
+
   var filterBar = document.querySelector(".gallery-filter");
   if (filterBar) {
     var items = document.querySelectorAll(".gallery-grid [data-category]");
