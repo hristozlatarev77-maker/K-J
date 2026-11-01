@@ -497,6 +497,10 @@
 
     document.addEventListener("keydown", function (event) {
       if (event.key === "Escape") {
+        if (isPromoOpen()) {
+          continueToLogin();
+          return;
+        }
         closeAuthModal();
       }
     });
@@ -564,6 +568,11 @@
             Object.keys(result.errors).forEach(function (key) {
               setFieldError(registerForm, key, result.errors[key]);
             });
+            var firstKey = Object.keys(result.errors)[0];
+            var firstField = registerForm.elements.namedItem(firstKey);
+            if (firstField && firstField.focus) {
+              firstField.focus();
+            }
           }
           return;
         }
