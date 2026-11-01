@@ -219,6 +219,11 @@ code {
   vertical-align: middle;
 }
 
+.site-nav {
+  flex: 1 1 auto;
+  min-width: 12em;
+}
+
 .site-nav ul,
 .nav-bar {
   display: flex;
@@ -230,15 +235,33 @@ code {
   padding: 0;
 }
 
-.nav-bar > .auth-nav-item {
-  order: 0;
+.nav-bar {
+  width: 100%;
+  justify-content: space-between;
+  gap: 1.5em 2.5em;
 }
 
 .nav-bar > .nav-dropdown {
-  order: 1;
-  margin-left: 1.35em;
-  padding-left: 1.35em;
-  border-left: 1px solid rgba(196, 139, 139, 0.45);
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.nav-bar > .auth-nav-cluster {
+  flex: 0 0 auto;
+  margin-left: auto;
+  list-style: none;
+}
+
+.auth-nav-cluster .auth-nav {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45em 0.65em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .site-nav a {

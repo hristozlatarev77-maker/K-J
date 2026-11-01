@@ -25,19 +25,7 @@
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Меню</button>
       <nav class="site-nav" id="primary-nav" aria-label="Главна навигация">
-        <ul class="nav-bar">
-          <li class="auth-nav-item" data-auth-guest>
-            <button type="button" class="btn-auth" data-open-auth="login">Вход</button>
-          </li>
-          <li class="auth-nav-item" data-auth-guest>
-            <button type="button" class="btn-auth btn-auth-solid" data-open-auth="register">Регистрация</button>
-          </li>
-          <li class="auth-nav-item" data-auth-user hidden>
-            <span class="auth-chip">Здравей, <strong data-auth-name></strong></span>
-          </li>
-          <li class="auth-nav-item" data-auth-user hidden>
-            <button type="button" class="btn-auth" id="auth-logout">Изход</button>
-          </li>
+                <ul class="nav-bar">
           <li class="nav-dropdown">
             <button type="button" class="nav-dropdown-toggle is-current" id="nav-pages-btn" aria-expanded="false" aria-controls="nav-pages-menu" aria-haspopup="true">
               Контакт
@@ -48,6 +36,22 @@
               <li><a href="gallery.html">Галерия</a></li>
               <li><a href="about.html">За нас</a></li>
               <li><a href="contact.html" aria-current="page">Контакт</a></li>
+            </ul>
+          </li>
+          <li class="auth-nav-cluster">
+            <ul class="auth-nav">
+              <li class="auth-nav-item" data-auth-guest>
+                <button type="button" class="btn-auth" data-open-auth="login">Вход</button>
+              </li>
+              <li class="auth-nav-item" data-auth-guest>
+                <button type="button" class="btn-auth btn-auth-solid" data-open-auth="register">Регистрация</button>
+              </li>
+              <li class="auth-nav-item" data-auth-user hidden>
+                <span class="auth-chip">Здравей, <strong data-auth-name></strong></span>
+              </li>
+              <li class="auth-nav-item" data-auth-user hidden>
+                <button type="button" class="btn-auth" id="auth-logout">Изход</button>
+              </li>
             </ul>
           </li>
         </ul>
