@@ -142,15 +142,16 @@
         dt.items.add(selectedReferenceFiles[i]);
       }
       referencesInput.files = dt.files;
-    } catch (err) {
-      /* DataTransfer may be unavailable in very old browsers */
-    }
-    referencesInput.value = selectedReferenceFiles.length ? referencesInput.value : "";
-    if (!selectedReferenceFiles.length) {
-      try {
+      if (!selectedReferenceFiles.length) {
         referencesInput.value = "";
-      } catch (err2) {
-        /* ignore */
+      }
+    } catch (err) {
+      if (!selectedReferenceFiles.length) {
+        try {
+          referencesInput.value = "";
+        } catch (err2) {
+          /* ignore */
+        }
       }
     }
     window.setTimeout(function () {
