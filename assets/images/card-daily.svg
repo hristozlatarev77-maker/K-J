@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" role="img" aria-label="Битова карикатура">
+  <rect width="600" height="450" fill="#E7F0F5"/>
+  <rect x="80" y="260" width="440" height="40" fill="#8B7355"/>
+  <rect x="100" y="160" width="180" height="100" fill="#fff" stroke="#1A1F24" stroke-width="4"/>
+  <circle cx="190" cy="210" r="25" fill="none" stroke="#1A1F24" stroke-width="3"/>
+  <line x1="175" y1="195" x2="205" y2="225" stroke="#E03C31" stroke-width="4"/>
+  <line x1="205" y1="195" x2="175" y2="225" stroke="#E03C31" stroke-width="4"/>
+  <!-- person staring at phone -->
+  <circle cx="400" cy="180" r="45" fill="#F0C7A8" stroke="#1A1F24" stroke-width="4"/>
+  <rect x="385" y="175" width="30" height="48" rx="4" fill="#1A1F24"/>
+  <rect x="389" y="180" width="22" height="36" fill="#4EC3F7"/>
+  <path d="M400 225 L400 300 M360 250 L400 240 L440 260" fill="none" stroke="#1A1F24" stroke-width="5" stroke-linecap="round"/>
+  <path d="M380 340 L400 300 L420 340" fill="none" stroke="#1A1F24" stroke-width="5" stroke-linecap="round"/>
+  <text x="40" y="60" font-family="Georgia, serif" font-size="26" fill="#1A1F24">Дигитална епоха</text>
+</svg>

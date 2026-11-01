@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="За карикатурата — кратка история, техники и ролята на хумора.">
+  <title>Карикатури — За карикатурата</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Към съдържанието</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">Карика<span>тури</span></span>
+        <span class="brand-tag">ателие</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Меню</button>
+      <nav class="site-nav" id="primary-nav" aria-label="Главна навигация">
+        <ul>
+          <li><a href="index.html">Начало</a></li>
+          <li><a href="gallery.html">Галерия</a></li>
+          <li><a href="about.html" aria-current="page">За карикатурата</a></li>
+          <li><a href="contact.html">Контакт</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="page">
+    <div class="layout-with-aside">
+      <div class="main-column">
+        <section class="section" aria-labelledby="about-title">
+          <header class="section-head">
+            <h1 id="about-title">За карикатурата</h1>
+            <p>Кратък поглед към историята, техниките и защо преувеличението е форма на яснота.</p>
+          </header>
+
+          <article class="article-card">
+            <h2>Кратка история</h2>
+            <figure class="float-figure">
+              <img src="assets/images/card-animals.svg" width="600" height="450" alt="Карикатура на котка с очила">
+              <figcaption>Животинските образи често носят човешки роли.</figcaption>
+            </figure>
+            <p>Карикатурата има корени в наблюденията на художниците върху портрета и обществения живот. От печатните листове до вестникарската графика, тя се развива като бърз визуален коментар.</p>
+            <p>В България жанрът е свързан с хумористичната преса, плаката и училищните издания. Днес карикатурата живее и онлайн — в комикси, мемета и илюстрирана журналистика.</p>
+            <blockquote>
+              Добрата карикатура не обяснява шегата. Тя я показва.
+            </blockquote>
+            <div class="clearfix"></div>
+          </article>
+
+          <article class="article-card">
+            <h2>Техники, които работят</h2>
+            <ul>
+              <li><strong>Преувеличение</strong> — нос, поза, жест или атрибут стават „подпис“.</li>
+              <li><strong>Опростяване</strong> — маха се излишното, остава характерът.</li>
+              <li><strong>Контраст</strong> — малко/голямо, сериозно/смешно, тишина/шум.</li>
+              <li><strong>Символ</strong> — везни, корона, топка, телефон — бърз контекст.</li>
+            </ul>
+            <ol>
+              <li>Наблюдавайте реален жест.</li>
+              <li>Изберете една идея.</li>
+              <li>Нарисувайте смело, после изчистете.</li>
+            </ol>
+            <p class="inline-meta">
+              <span class="meta-icon" aria-hidden="true"></span>
+              Иконата до текста е подравнена с <code>vertical-align: middle</code>.
+            </p>
+          </article>
+
+          <section class="section" aria-labelledby="layout-note">
+            <h2 id="layout-note">За оформлението на сайта</h2>
+            <p>Страниците използват семантични HTML5 елементи и CSS свойства като <code>float</code>/<code>clear</code> в статиите, <code>position: sticky</code> за навигацията, <code>opacity</code> при ховър, <code>overflow</code> в лентата с цитати и <code>visibility</code> във филтъра на галерията.</p>
+            <div class="anim-row">
+              <span class="ink-blob" aria-hidden="true"></span>
+              <p style="margin:0">CSS анимация на „мастилено петно“ — пример за движение без външна библиотека.</p>
+            </div>
+          </section>
+        </section>
+      </div>
+
+      <aside class="side-column" aria-label="Допълнителни връзки">
+        <div class="side-panel">
+          <span class="side-ribbon">гид</span>
+          <h2>Къде да продължите</h2>
+          <ul>
+            <li><a href="gallery.html">Галерия по жанрове</a></li>
+            <li><a href="contact.html">Изпратете идея или въпрос</a></li>
+            <li><a href="index.html">Начало с видео и звук</a></li>
+          </ul>
+          <img src="assets/images/card-sport.svg" width="600" height="450" alt="Спортна карикатура">
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <strong>Карикатури</strong>
+        <p>Курсов проект — Увод в уеб програмирането, ФМИ.</p>
+      </div>
+      <nav aria-label="Връзки в долния колонтитул">
+        <ul>
+          <li><a href="index.html">Начало</a></li>
+          <li><a href="gallery.html">Галерия</a></li>
+          <li><a href="contact.html">Контакт</a></li>
+        </ul>
+      </nav>
+      <p class="footer-meta">&copy; <span id="year">2026</span> Курсова работа</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Галерия с учебни карикатури по жанрове — политика, бит, животни, спорт.">
+  <title>Карикатури — Галерия</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Към съдържанието</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">Карика<span>тури</span></span>
+        <span class="brand-tag">ателие</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Меню</button>
+      <nav class="site-nav" id="primary-nav" aria-label="Главна навигация">
+        <ul>
+          <li><a href="index.html">Начало</a></li>
+          <li><a href="gallery.html" aria-current="page">Галерия</a></li>
+          <li><a href="about.html">За карикатурата</a></li>
+          <li><a href="contact.html">Контакт</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="page">
+    <div class="layout-with-aside">
+      <div class="main-column">
+        <section class="section" aria-labelledby="gallery-title">
+          <header class="section-head">
+            <h1 id="gallery-title">Галерия</h1>
+            <p>Филтрирайте по жанр. Скритите елементи използват <code>visibility</code>, <code>opacity</code> и <code>overflow</code>, за да демонстрират CSS поведение при адаптивен списък.</p>
+          </header>
+
+          <div class="gallery-filter" role="group" aria-label="Филтър по жанр">
+            <button type="button" class="is-active" data-filter="all">Всички</button>
+            <button type="button" data-filter="politics">Политика</button>
+            <button type="button" data-filter="daily">Бит</button>
+            <button type="button" data-filter="animals">Животни</button>
+            <button type="button" data-filter="sport">Спорт</button>
+          </div>
+
+          <ul class="gallery-grid">
+            <li data-category="politics">
+              <article>
+                <img src="assets/images/card-politics.svg" width="600" height="450" alt="Карикатура с везни и политическа фигура">
+                <div class="cap">
+                  <h2>Баланс?</h2>
+                  <p>Политическа сатира с преувеличени пропорции и символи на справедливост.</p>
+                </div>
+              </article>
+            </li>
+            <li data-category="daily">
+              <article>
+                <img src="assets/images/card-daily.svg" width="600" height="450" alt="Човек гледа телефон до счупен монитор">
+                <div class="cap">
+                  <h2>Дигитална епоха</h2>
+                  <p>Битова сцена за вниманието, екраните и ежедневния абсурд.</p>
+                </div>
+              </article>
+            </li>
+            <li data-category="animals">
+              <article>
+                <img src="assets/images/card-animals.svg" width="600" height="450" alt="Котка с очила като критик">
+                <div class="cap">
+                  <h2>Мъдрият критик</h2>
+                  <p>Животинска карикатура — характерът говори по-силно от репликата.</p>
+                </div>
+              </article>
+            </li>
+            <li data-category="sport">
+              <article>
+                <img src="assets/images/card-sport.svg" width="600" height="450" alt="Фен коментира гол от дивана">
+                <div class="cap">
+                  <h2>Гол от дивана</h2>
+                  <p>Спортният хумор обича големите жестове и още по-големите мнения.</p>
+                </div>
+              </article>
+            </li>
+            <li data-category="politics">
+              <article>
+                <img src="assets/images/portrait-aside.svg" width="400" height="500" alt="Портретна карикатура">
+                <div class="cap">
+                  <h2>Портрет в мастило</h2>
+                  <p>Класически похват: нос, вежди и поза като „подпис“ на личността.</p>
+                </div>
+              </article>
+            </li>
+            <li data-category="daily">
+              <article>
+                <img src="assets/images/hero-cartoon.svg" width="1200" height="700" alt="Художник на бюро">
+                <div class="cap">
+                  <h2>В ателието</h2>
+                  <p>Работният процес — лист, химикалка и търсене на точния жест.</p>
+                </div>
+              </article>
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <aside class="side-column" aria-label="Легенда към галерията">
+        <div class="side-panel">
+          <h2>Как да гледате</h2>
+          <ol>
+            <li>Първо идеята — какво се преувеличава?</li>
+            <li>После линията — къде е акцентът?</li>
+            <li>Накрая контекстът — за кого е шегата?</li>
+          </ol>
+          <p><a href="about.html">Прочетете за техниките</a></p>
+        </div>
+        <article class="article-card">
+          <h3>Бележка</h3>
+          <p>Изображенията са оригинални SVG илюстрации за учебния сайт — не са репродукции на чужди автори.</p>
+        </article>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <strong>Карикатури</strong>
+        <p>Курсов проект — Увод в уеб програмирането, ФМИ.</p>
+      </div>
+      <nav aria-label="Връзки в долния колонтитул">
+        <ul>
+          <li><a href="index.html">Начало</a></li>
+          <li><a href="about.html">За карикатурата</a></li>
+          <li><a href="contact.html">Контакт</a></li>
+        </ul>
+      </nav>
+      <p class="footer-meta">&copy; <span id="year">2026</span> Курсова работа</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

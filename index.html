@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Курсов сайт за карикатури — история, галерия, медии и контактна форма.">
+  <title>Карикатури — Начало</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Към съдържанието</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">Карика<span>тури</span></span>
+        <span class="brand-tag">ателие</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Меню</button>
+      <nav class="site-nav" id="primary-nav" aria-label="Главна навигация">
+        <ul>
+          <li><a href="index.html" aria-current="page">Начало</a></li>
+          <li><a href="gallery.html">Галерия</a></li>
+          <li><a href="about.html">За карикатурата</a></li>
+          <li><a href="contact.html">Контакт</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" aria-label="Начален екран">
+    <img class="hero-media" src="assets/images/hero-cartoon.svg" width="1200" height="700" alt="Илюстрация на художник, който рисува карикатура на бюро">
+    <div class="hero-content">
+      <p class="hero-brand">Карика<span>тури</span></p>
+      <p class="hero-lead">Линията, която преувеличава истината — хумор, сатира и наблюдателност в едно ателие.</p>
+      <div class="hero-actions">
+        <a class="btn" href="gallery.html">Разгледай галерията</a>
+        <a class="btn btn-ghost" href="contact.html">Изпрати идея</a>
+      </div>
+    </div>
+  </section>
+
+  <main id="main" class="page">
+    <div class="layout-with-aside">
+      <div class="main-column">
+        <section class="section" aria-labelledby="intro-title">
+          <header class="section-head">
+            <h1 id="intro-title">Добре дошли в ателието</h1>
+            <p>Този сайт е курсов проект по „Увод в уеб програмирането“ и представя карикатурата като визуален език — от политическа сатира до битови скици.</p>
+          </header>
+
+          <article class="article-card">
+            <h2>Какво е карикатурата?</h2>
+            <figure class="float-figure">
+              <img src="assets/images/portrait-aside.svg" width="400" height="500" alt="Портретна карикатура с подчертани черти">
+              <figcaption>Преувеличението е инструмент, не грешка.</figcaption>
+            </figure>
+            <p>Карикатурата изостря характерни черти, жестове и ситуации, за да каже повече с по-малко линии. Тя може да е нежна, язвителна или документална — но винаги разчита на наблюдателност.</p>
+            <p>В галерията ще откриете примери от няколко жанра: политика, ежедневие, животни и спорт. Всяка творба е учебна илюстрация, създадена за този сайт.</p>
+            <p class="inline-meta">
+              <span class="meta-icon" aria-hidden="true"></span>
+              <strong>Съвет:</strong> гледайте едновременно формата и идеята — карикатурата живее между тях.
+            </p>
+            <div class="clearfix"></div>
+          </article>
+
+          <article class="article-card">
+            <h2>Звук, движение и мастило</h2>
+            <p>По-долу има кратко видео въведение и джингъл. Анимираното „мастилено петно“ показва как CSS анимацията може да допълни илюстрацията.</p>
+            <div class="anim-row" aria-hidden="true">
+              <span class="ink-blob"></span>
+              <span class="pen-line"></span>
+              <span>линия в движение</span>
+            </div>
+            <div class="media-block">
+              <div>
+                <h3>Видео</h3>
+                <video controls preload="metadata" poster="assets/images/hero-cartoon.svg">
+                  <source src="assets/media/intro-cartoon.mp4" type="video/mp4">
+                  Вашият браузър не поддържа видео елемента.
+                </video>
+              </div>
+              <div>
+                <h3>Звук</h3>
+                <audio controls preload="metadata">
+                  <source src="assets/media/cartoon-jingle.mp3" type="audio/mpeg">
+                  <source src="assets/media/cartoon-jingle.wav" type="audio/wav">
+                  Вашият браузър не поддържа аудио елемента.
+                </audio>
+                <p class="hint">Кратък джингъл — подходящ фон за ателие или презентация.</p>
+              </div>
+            </div>
+          </article>
+        </section>
+      </div>
+
+      <aside class="side-column" aria-label="Странична информация">
+        <div class="side-panel">
+          <span class="side-ribbon">ново</span>
+          <h2>Защо карикатури?</h2>
+          <p>Защото една добра скица казва това, което дългият текст често заобикаля.</p>
+          <img src="assets/images/card-politics.svg" width="600" height="450" alt="Скица на везни и политическа фигура">
+          <ul>
+            <li><a href="about.html">История и техники</a></li>
+            <li><a href="gallery.html">Жанрове в галерията</a></li>
+            <li><a href="contact.html">Форма за идеи</a></li>
+          </ul>
+        </div>
+        <div class="scroll-strip" tabindex="0">
+          <h3>Цитати от ателието</h3>
+          <p>„Карикатурата не лъже — тя преувеличава вече видимото.“</p>
+          <p>„Хуморът е врата; сатирата е ключът.“</p>
+          <p>„Ако линията трепери, понякога това е характерът, не грешката.“</p>
+          <p>„Добрата карикатура се чете за секунди и остава за дни.“</p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <strong>Карикатури</strong>
+        <p>Курсов проект — Увод в уеб програмирането, ФМИ.</p>
+      </div>
+      <nav aria-label="Връзки в долния колонтитул">
+        <ul>
+          <li><a href="gallery.html">Галерия</a></li>
+          <li><a href="about.html">За карикатурата</a></li>
+          <li><a href="contact.html">Контакт</a></li>
+        </ul>
+      </nav>
+      <p class="footer-meta">&copy; <span id="year">2026</span> Курсова работа</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
