@@ -260,12 +260,16 @@
           </div>
           <button class="btn" type="submit">Създай профил</button>
         </form>
-        <div id="register-success" class="register-success" hidden>
+                <div id="register-success" class="register-success" hidden>
           <h3>Готово — добре дошли!</h3>
-          <p>Вашият профил е създаден. За първа поръчка на <strong>карикатура</strong> използвайте промо код:</p>
-          <p class="promo-code-banner">Код: <strong id="promo-code-value">KJ15</strong> — <strong>15% отстъпка</strong></p>
-          <p class="hint">Кодът важи еднократно за първа карикатура. Запишете го или го приложете във формата за поръчка.</p>
-          <button type="button" class="btn" id="promo-done">Към сайта</button>
+          <p>Профилът е създаден. Запазете промо кода за първа карикатура (−15%):</p>
+          <div class="promo-code-panel">
+            <label for="promo-code-field">Вашият промо код</label>
+            <input type="text" id="promo-code-field" class="promo-code-field" value="KJ15" readonly>
+            <p class="promo-code-banner">Код: <strong id="promo-code-value">KJ15</strong> — <strong>15% отстъпка</strong></p>
+          </div>
+          <p class="hint">Натиснете „Продължи“, за да влезете в профила си.</p>
+          <button type="button" class="btn" id="promo-continue">Продължи</button>
         </div>
       </div>
     </div>

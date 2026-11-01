@@ -172,7 +172,7 @@
     var users = readUsers();
     users.push(user);
     writeUsers(users);
-    setSession(user);
+    /* Do not auto-login — user continues to login after seeing KJ15 */
     return { ok: true, user: user, promoCode: PROMO_CODE };
   }
 
@@ -320,10 +320,14 @@
     }
   }
 
-  function showRegisterSuccess(promoCode) {
+  var pendingLoginEmail = "";
+
+  function showRegisterSuccess(promoCode, email) {
     var panel = document.getElementById("register-success");
     var form = document.getElementById("register-form");
     var codeEl = document.getElementById("promo-code-value");
+    var codeField = document.getElementById("promo-code-field");
+    pendingLoginEmail = email || "";
     if (form) {
       form.hidden = true;
     }
@@ -331,6 +335,9 @@
       panel.hidden = false;
       if (codeEl) {
         codeEl.textContent = promoCode || PROMO_CODE;
+      }
+      if (codeField) {
+        codeField.value = promoCode || PROMO_CODE;
       }
     }
   }
@@ -343,6 +350,22 @@
     }
     if (form) {
       form.hidden = false;
+    }
+  }
+
+  function continueToLogin() {
+    hideRegisterSuccess();
+    switchTab("login");
+    var loginForm = document.getElementById("login-form");
+    if (loginForm) {
+      clearFieldErrors(loginForm);
+      if (pendingLoginEmail && loginForm.email) {
+        loginForm.email.value = pendingLoginEmail;
+      }
+      if (loginForm.password) {
+        loginForm.password.value = "";
+        loginForm.password.focus();
+      }
     }
   }
 
@@ -450,11 +473,10 @@
       closeBtn.addEventListener("click", closeAuthModal);
     }
 
-    var promoDoneBtn = document.getElementById("promo-done");
+    var promoDoneBtn = document.getElementById("promo-continue");
     if (promoDoneBtn) {
       promoDoneBtn.addEventListener("click", function () {
-        closeAuthModal();
-        updateAuthUI();
+        continueToLogin();
       });
     }
 
@@ -530,9 +552,9 @@
           }
           return;
         }
+        var registeredEmail = result.user.email;
         registerForm.reset();
-        showRegisterSuccess(result.promoCode);
-        updateAuthUI();
+        showRegisterSuccess(result.promoCode, registeredEmail);
       });
     }
 
