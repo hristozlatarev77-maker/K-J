@@ -151,11 +151,14 @@ code {
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 150;
   background: rgba(250, 244, 242, 1.0);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(196, 139, 139, 0.45);
   min-height: var(--nav-h);
+  overflow: visible;
+  pointer-events: auto;
+  isolation: isolate;
 }
 
 .header-inner {
@@ -220,8 +223,12 @@ code {
 }
 
 .site-nav {
+  position: relative;
+  z-index: 2;
   flex: 1 1 auto;
   min-width: 12em;
+  overflow: visible;
+  pointer-events: auto;
 }
 
 .site-nav ul,
@@ -282,32 +289,39 @@ code {
 
 .nav-dropdown {
   position: relative;
+  z-index: 3;
   list-style: none;
+  overflow: visible;
+  pointer-events: auto;
 }
 
 .nav-dropdown-toggle {
+  position: relative;
+  z-index: 4;
   display: inline-flex;
   align-items: center;
   gap: 0.4em;
   margin: 0;
-  padding: 0.35em 0.15em;
+  padding: 0.4em 0.55em;
   font: inherit;
   font-weight: 700;
   letter-spacing: -0.01em;
   color: var(--ink);
-  background: transparent;
-  border: 0;
-  border-bottom: 2px solid transparent;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(196, 139, 139, 0.55);
+  border-bottom: 1px solid rgba(196, 139, 139, 0.55);
   cursor: pointer;
   vertical-align: middle;
+  pointer-events: auto;
 }
 
 .nav-dropdown-toggle:hover,
 .nav-dropdown-toggle:focus-visible,
 .nav-dropdown-toggle[aria-expanded="true"],
 .nav-dropdown-toggle.is-current {
-  border-bottom-color: var(--rose);
   color: var(--rose-deep);
+  background: rgba(255, 255, 255, 0.95);
+  border-color: var(--rose);
   outline: none;
 }
 
@@ -328,46 +342,79 @@ code {
 
 .nav-dropdown-menu {
   position: absolute;
-  top: calc(100% + 0.45em);
+  top: calc(100% + 0.35em);
   left: 0;
-  z-index: 120;
-  min-width: 11em;
+  z-index: 200;
+  min-width: 12.5em;
   margin: 0;
-  padding: 0.45em 0.55em;
+  padding: 0.4em;
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.15em;
-  background: rgba(250, 244, 242, 0.98);
-  border: 1px solid rgba(196, 139, 139, 0.55);
-  box-shadow: 0 10px 28px rgba(20, 14, 16, 0.12);
+  gap: 0.3em;
+  background: #faf4f2;
+  border: 1px solid rgba(196, 139, 139, 0.65);
+  box-shadow: 0 14px 36px rgba(20, 14, 16, 0.22);
   visibility: hidden;
   opacity: 0;
-  overflow: hidden;
+  overflow: visible;
+  pointer-events: none;
 }
 
 .nav-dropdown.is-open > .nav-dropdown-menu,
 .nav-dropdown-menu:not([hidden]) {
   visibility: visible;
   opacity: 1;
+  pointer-events: auto;
 }
 
 .nav-dropdown-menu[hidden] {
-  display: none;
+  display: none !important;
+  pointer-events: none !important;
+}
+
+.nav-dropdown-menu li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-dropdown-menu a {
   display: block;
-  padding: 0.45em 0.55em;
-  border-bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0.7em 0.85em;
+  font-weight: 700;
+  text-align: left;
+  text-decoration: none;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(196, 139, 139, 0.4);
+  border-bottom: 1px solid rgba(196, 139, 139, 0.4);
+  cursor: pointer;
+  pointer-events: auto;
 }
 
 .nav-dropdown-menu a:hover,
-.nav-dropdown-menu a:focus-visible,
+.nav-dropdown-menu a:focus-visible {
+  background: var(--rose-deep);
+  border-color: var(--rose-deep);
+  color: #fff;
+  outline: none;
+}
+
 .nav-dropdown-menu a[aria-current="page"] {
-  background: rgba(196, 139, 139, 0.18);
+  background: rgba(196, 139, 139, 0.22);
+  border-color: var(--rose);
   color: var(--rose-deep);
-  border-bottom-color: transparent;
+}
+
+.nav-dropdown-menu a[aria-current="page"]:hover,
+.nav-dropdown-menu a[aria-current="page"]:focus-visible {
+  background: var(--rose-deep);
+  border-color: var(--rose-deep);
+  color: #fff;
 }
 
 .nav-toggle {
@@ -449,13 +496,16 @@ code {
   );
 }
 
-.site-header,
+/* Keep page/hero below the sticky header so the nav dropdown stays clickable */
 .hero,
 .page,
-.site-footer,
-.auth-overlay {
+.site-footer {
   position: relative;
   z-index: 1;
+}
+
+.site-header {
+  z-index: 150;
 }
 
 /* ---------- Hero (content only over the fixed background) ---------- */
