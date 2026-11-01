@@ -39,24 +39,46 @@
     year.textContent = String(new Date().getFullYear());
   }
 
-  /* Floating / falling parallax: background drifts downward on scroll */
+  /* Parallax + clearer background on scroll (less cream wash) */
   var heroLayer = document.querySelector("[data-parallax-hero]");
   var siteLayer = document.querySelector("[data-parallax-site]");
+  var siteScrim = document.querySelector(".site-parallax-scrim");
+  var heroEl = document.querySelector(".hero");
+  var pageEls = document.querySelectorAll(".page-atmosphere");
   var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var ticking = false;
 
+  function clamp(n, min, max) {
+    return Math.max(min, Math.min(max, n));
+  }
+
   function updateParallax() {
     ticking = false;
-    if (reduceMotion) {
-      return;
-    }
     var y = window.pageYOffset || document.documentElement.scrollTop || 0;
-    /* Positive translateY = drifts / falls downward as the page scrolls down */
-    if (heroLayer) {
-      heroLayer.style.transform = "translate3d(0, " + (y * 0.42) + "px, 0)";
+    var progress = clamp(y / Math.max(window.innerHeight * 0.85, 1), 0, 1);
+
+    if (!reduceMotion) {
+      if (heroLayer) {
+        heroLayer.style.transform = "translate3d(0, " + y * 0.42 + "px, 0)";
+      }
+      if (siteLayer) {
+        siteLayer.style.transform = "translate3d(0, " + y * 0.28 + "px, 0)";
+      }
     }
+
+    /* As user scrolls: stronger/vivid bg, lighter scrim */
     if (siteLayer) {
-      siteLayer.style.transform = "translate3d(0, " + (y * 0.28) + "px, 0)";
+      var baseOpacity = window.matchMedia("(max-width: 767px)").matches ? 0.38 : 0.55;
+      siteLayer.style.opacity = String(baseOpacity + progress * 0.4);
+    }
+    if (siteScrim) {
+      siteScrim.style.opacity = String(1 - progress * 0.78);
+    }
+    if (heroEl) {
+      heroEl.style.setProperty("--hero-scrim", String(1 - progress * 0.65));
+    }
+    for (var i = 0; i < pageEls.length; i++) {
+      pageEls[i].style.background = "rgba(250, 244, 242, " + (0.78 - progress * 0.42) + ")";
     }
   }
 
@@ -67,8 +89,7 @@
     }
   }
 
-  if ((heroLayer || siteLayer) && !reduceMotion) {
-    window.addEventListener("scroll", onScroll, { passive: true });
-    updateParallax();
-  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+  updateParallax();
 })();

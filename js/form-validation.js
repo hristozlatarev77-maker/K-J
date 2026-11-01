@@ -49,6 +49,17 @@
   form.addEventListener("submit", function (event) {
     event.preventDefault();
 
+    if (!window.KJAuth || !window.KJAuth.isLoggedIn()) {
+      if (window.KJAuth && window.KJAuth.openAuthModal) {
+        window.KJAuth.openAuthModal("login");
+      }
+      var gateMsg = document.getElementById("order-auth-message");
+      if (gateMsg) {
+        gateMsg.textContent = "Моля, влезте или се регистрирайте, за да изпратите поръчка.";
+      }
+      return;
+    }
+
     var valid = true;
     var groups = form.querySelectorAll(".form-group, fieldset.requires-choice");
 

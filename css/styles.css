@@ -291,20 +291,24 @@ code {
   width: 110%;
   height: 150%;
   background: url("../assets/brand/site-background.jpg") center 22% / cover no-repeat;
-  will-change: transform;
+  will-change: transform, opacity;
   transform: translate3d(0, 0, 0);
-  opacity: 0.42;
+  opacity: 0.55;
+  transition: opacity 0.15s linear;
 }
 
 .site-parallax-scrim {
   position: absolute;
   inset: 0;
+  opacity: 1;
+  transition: opacity 0.15s linear;
   background:
-    linear-gradient(180deg, rgba(250, 244, 242, 0.35) 0%, rgba(250, 244, 242, 0.72) 55%, var(--cream) 100%);
+    linear-gradient(180deg, rgba(250, 244, 242, 0.28) 0%, rgba(250, 244, 242, 0.55) 50%, rgba(250, 244, 242, 0.78) 100%);
 }
 
 /* ---------- Hero (full-bleed brand atmosphere, no logo overlay) ---------- */
 .hero {
+  --hero-scrim: 1;
   position: relative;
   min-height: 88vh;
   display: flex;
@@ -336,20 +340,22 @@ code {
   vertical-align: middle;
 }
 
-/* Soft scrim so headline stays readable — no logo in background */
+/* Soft scrim so headline stays readable — fades clearer on scroll via --hero-scrim */
 .hero::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
+  opacity: var(--hero-scrim, 1);
+  transition: opacity 0.15s linear;
   background:
     linear-gradient(
       180deg,
-      rgba(250, 244, 242, 0.12) 0%,
-      rgba(250, 244, 242, 0.08) 32%,
-      rgba(250, 244, 242, 0.68) 62%,
-      rgba(250, 244, 242, 0.95) 82%,
+      rgba(250, 244, 242, 0.1) 0%,
+      rgba(250, 244, 242, 0.06) 30%,
+      rgba(250, 244, 242, 0.55) 62%,
+      rgba(250, 244, 242, 0.88) 82%,
       var(--cream) 100%
     );
 }
@@ -365,7 +371,8 @@ code {
 
 .page-atmosphere {
   position: relative;
-  background: rgba(250, 244, 242, 0.82);
+  background: rgba(250, 244, 242, 0.72);
+  transition: background 0.15s linear;
 }
 
 .hero-brand {
@@ -972,7 +979,7 @@ legend {
   }
 
   .site-parallax-layer {
-    opacity: 0.28;
+    opacity: 0.4;
   }
 
   .side-ribbon {
@@ -1050,5 +1057,152 @@ legend {
   .hero-parallax,
   .site-parallax-layer {
     transform: none !important;
+  }
+}
+
+/* ---------- Auth modal + nav account ---------- */
+.auth-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.auth-nav li {
+  list-style: none;
+  margin: 0;
+}
+
+.auth-chip {
+  display: inline-block;
+  font-size: 0.85em;
+  font-weight: 600;
+  color: var(--ink-soft);
+  vertical-align: middle;
+}
+
+.btn-auth {
+  display: inline-block;
+  padding: 0.35em 0.75em;
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.88em;
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-auth:hover,
+.btn-auth:focus-visible {
+  background: var(--rose-deep);
+  border-color: var(--rose-deep);
+  color: var(--white);
+}
+
+.btn-auth-solid {
+  background: var(--ink);
+  color: var(--white);
+}
+
+.auth-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
+  background: rgba(28, 20, 22, 0.45);
+  visibility: hidden;
+  opacity: 0;
+  overflow: auto;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.auth-overlay.is-open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.auth-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 26em;
+  background: var(--cream);
+  border: 1px solid rgba(196, 139, 139, 0.5);
+  padding: 1.35em 1.4em 1.5em;
+  float: none;
+  clear: both;
+}
+
+.auth-close {
+  position: absolute;
+  top: 0.55em;
+  right: 0.55em;
+  border: 0;
+  background: transparent;
+  font-size: 1.4em;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--ink);
+}
+
+.auth-tabs {
+  display: flex;
+  gap: 0.5em;
+  margin: 0 0 1em;
+}
+
+.auth-tabs button {
+  flex: 1;
+  font: inherit;
+  font-weight: 700;
+  padding: 0.5em;
+  border: 1px solid var(--ink);
+  background: transparent;
+  cursor: pointer;
+}
+
+.auth-tabs button.is-active {
+  background: var(--ink);
+  color: var(--white);
+}
+
+.auth-dialog h2 {
+  margin-top: 0;
+  font-size: 1.45em;
+}
+
+.order-auth-gate {
+  border: 1px dashed var(--rose);
+  background: rgba(255, 255, 255, 0.7);
+  padding: 0.9em 1em;
+  margin-bottom: 1.1em;
+}
+
+.order-auth-gate[hidden],
+[data-auth-guest][hidden],
+[data-auth-user][hidden],
+.auth-panel[hidden] {
+  display: none !important;
+}
+
+#contact-form.is-locked {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+@media screen and (max-width: 767px) {
+  .header-inner {
+    align-items: flex-start;
+  }
+
+  .auth-nav {
+    width: 100%;
   }
 }
