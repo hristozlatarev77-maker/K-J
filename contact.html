@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Контактна форма за идеи, въпроси и обратна връзка относно карикатурите.">
-  <title>Карикатури — Контакт</title>
+  <meta name="description" content="Контакт и поръчка към K&amp;J Art — форма с JavaScript валидация.">
+  <title>K&amp;J Art — Контакт</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -13,31 +13,34 @@
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="index.html">
-        <span class="brand-mark">Карика<span>тури</span></span>
-        <span class="brand-tag">ателие</span>
+        <img class="brand-logo" src="assets/brand/logo-kj-art.png" width="1254" height="1254" alt="">
+        <span class="brand-text">
+          <span class="brand-mark">K<span>&amp;</span>J Art</span>
+          <span class="brand-tag">ателие</span>
+        </span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Меню</button>
       <nav class="site-nav" id="primary-nav" aria-label="Главна навигация">
         <ul>
           <li><a href="index.html">Начало</a></li>
           <li><a href="gallery.html">Галерия</a></li>
-          <li><a href="about.html">За карикатурата</a></li>
+          <li><a href="about.html">За нас</a></li>
           <li><a href="contact.html" aria-current="page">Контакт</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main id="main" class="page">
+  <main id="main" class="page page-atmosphere">
     <section class="section" aria-labelledby="contact-title">
       <header class="section-head">
         <h1 id="contact-title">Контакт</h1>
-        <p>Изпратете идея за карикатура, въпрос към курса или обратна връзка. Формата се валидира с JavaScript в браузъра.</p>
+        <p>Поръчайте портрет или карикатура. Формата се валидира с JavaScript в браузъра.</p>
       </header>
 
       <div class="contact-layout">
         <article class="form-panel">
-          <h2>Форма за запитване</h2>
+          <h2>Форма за поръчка</h2>
           <form id="contact-form" action="#" method="post" novalidate>
             <div class="form-group">
               <label for="name">Име *</label>
@@ -65,13 +68,13 @@
             </div>
 
             <div class="form-group">
-              <label for="date">Желана дата за отговор</label>
+              <label for="date">Желана дата за готовност</label>
               <input type="date" id="date" name="date">
               <span class="error-msg" role="alert"></span>
             </div>
 
             <div class="form-group">
-              <label for="website">Личен сайт / портфолио</label>
+              <label for="website">Линк към референтна снимка</label>
               <input type="url" id="website" name="website" placeholder="https://...">
               <span class="error-msg" role="alert"></span>
             </div>
@@ -80,9 +83,9 @@
               <label for="topic">Тема *</label>
               <select id="topic" name="topic" required>
                 <option value="">— изберете —</option>
-                <option value="idea">Идея за карикатура</option>
-                <option value="course">Въпрос по курса</option>
-                <option value="gallery">Галерия / медии</option>
+                <option value="portrait">Портрет</option>
+                <option value="caricature">Карикатура</option>
+                <option value="gift">Подарък / рамка</option>
                 <option value="other">Друго</option>
               </select>
               <span class="error-msg" role="alert"></span>
@@ -91,10 +94,10 @@
             <fieldset class="requires-choice">
               <legend>Предпочитан стил *</legend>
               <div class="choice-row">
-                <label><input type="checkbox" name="style" value="political"> Политически</label>
-                <label><input type="checkbox" name="style" value="daily"> Битов</label>
-                <label><input type="checkbox" name="style" value="animals"> Животни</label>
-                <label><input type="checkbox" name="style" value="sport"> Спорт</label>
+                <label><input type="checkbox" name="style" value="soft"> Мек портрет</label>
+                <label><input type="checkbox" name="style" value="caricature"> Карикатура</label>
+                <label><input type="checkbox" name="style" value="color"> Цветен</label>
+                <label><input type="checkbox" name="style" value="bw"> Черно-бял</label>
               </div>
               <span class="error-msg" role="alert"></span>
             </fieldset>
@@ -110,7 +113,7 @@
 
             <div class="form-group">
               <label for="message">Съобщение *</label>
-              <textarea id="message" name="message" required minlength="10" placeholder="Опишете идеята или въпроса..."></textarea>
+              <textarea id="message" name="message" required minlength="10" placeholder="Опишете повода, броя хора и стила..."></textarea>
               <span class="error-msg" role="alert"></span>
             </div>
 
@@ -131,15 +134,15 @@
 
         <aside aria-label="Информация за контакт">
           <div class="side-panel">
-            <h2>Ателие „Карикатури“</h2>
-            <p>Учебен сайт без реална администрация. Изпращането показва клиентска валидация.</p>
+            <h2>K&amp;J Art</h2>
+            <p>Учебен сайт с реални примерни творби. Изпращането показва клиентска валидация.</p>
             <ul>
-              <li>Имейл (учебен): cartoons@example.bg</li>
-              <li>Часове: понеделник–петък, 10:00–16:00</li>
+              <li>Имейл (учебен): hello@kj-art.example</li>
+              <li>Отговор: обикновено до 2–3 дни</li>
             </ul>
-            <img src="assets/images/card-daily.svg" width="600" height="450" alt="Битова карикатура">
+            <img src="assets/brand/sample-birthday-dad-1.jpg" width="1290" height="1691" alt="Примерна семейна карикатура в рамка">
           </div>
-          <article class="article-card">
+          <article class="article-panel">
             <h3>Типове полета във формата</h3>
             <ul>
               <li>text, email, tel, number, date, url</li>
@@ -154,18 +157,21 @@
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <div>
-        <strong>Карикатури</strong>
-        <p>Курсов проект — Увод в уеб програмирането, ФМИ.</p>
+      <div class="footer-brand">
+        <img src="assets/brand/logo-kj-art.png" width="1254" height="1254" alt="">
+        <div>
+          <strong>K&amp;J Art</strong>
+          <p>Портрети · Карикатури · Спомени</p>
+        </div>
       </div>
       <nav aria-label="Връзки в долния колонтитул">
         <ul>
           <li><a href="index.html">Начало</a></li>
           <li><a href="gallery.html">Галерия</a></li>
-          <li><a href="about.html">За карикатурата</a></li>
+          <li><a href="about.html">За нас</a></li>
         </ul>
       </nav>
-      <p class="footer-meta">&copy; <span id="year">2026</span> Курсова работа</p>
+      <p class="footer-meta">&copy; <span id="year">2026</span> K&amp;J Art · курсова работа, ФМИ</p>
     </div>
   </footer>
 
