@@ -117,7 +117,7 @@ blockquote {
   margin: 1.25em 0;
   padding: 0.85em 1.1em;
   border-left: 4px solid var(--rose);
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.66);
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: 1.2em;
   font-style: italic;
@@ -150,7 +150,7 @@ code {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(250, 244, 242, 0.92);
+  background: rgba(250, 244, 242, 1.0);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(196, 139, 139, 0.45);
   min-height: var(--nav-h);
@@ -370,7 +370,7 @@ code {
 .page-atmosphere {
   position: relative;
   z-index: 1;
-  background: rgba(250, 244, 242, 0.38);
+  background: rgba(250, 244, 242, 0.46);
   transition: background 0.2s linear;
 }
 
@@ -457,7 +457,7 @@ code {
 }
 
 .article-panel {
-  background: rgba(255, 255, 255, 0.58);
+  background: rgba(255, 255, 255, 0.84);
   border: 1px solid rgba(196, 139, 139, 0.4);
   padding: 1.3em 1.4em;
   margin-bottom: 1.5em;
@@ -562,7 +562,7 @@ code {
 
 .scroll-strip {
   border: 1px solid rgba(196, 139, 139, 0.45);
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.78);
   max-height: 9.5em;
   overflow: auto;
   padding: 0.9em 1em;
@@ -582,7 +582,7 @@ code {
 .gallery-grid li {
   list-style: none;
   margin: 0;
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.78);
   border: 1px solid rgba(196, 139, 139, 0.45);
   overflow: hidden;
   position: relative;
@@ -664,7 +664,7 @@ code {
 
 .media-block audio {
   padding: 0.75em;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 1.0);
 }
 
 .ink-blob {
@@ -685,7 +685,7 @@ code {
   margin: 1.5em 0;
   padding: 1em;
   border: 1px dashed var(--rose);
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.6);
 }
 
 .pen-line {
@@ -752,7 +752,7 @@ code {
 }
 
 .form-panel {
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.86);
   border: 1px solid rgba(196, 139, 139, 0.45);
   padding: 1.5em;
 }
@@ -1170,7 +1170,7 @@ legend {
 
 .order-auth-gate {
   border: 1px dashed var(--rose);
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.84);
   padding: 0.9em 1em;
   margin-bottom: 1.1em;
 }
