@@ -928,10 +928,42 @@ code {
 }
 
 .file-preview-item {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.35em;
   min-width: 0;
+}
+
+.file-preview-remove {
+  position: absolute;
+  top: 0.2em;
+  right: 0.2em;
+  z-index: 2;
+  box-sizing: border-box;
+  width: 1.55em;
+  height: 1.55em;
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: inherit;
+  font-size: 1.05em;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  background: rgba(42, 28, 31, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.file-preview-remove:hover,
+.file-preview-remove:focus-visible {
+  background: var(--rose-deep);
+  border-color: var(--rose-deep);
+  outline: none;
 }
 
 .file-preview-thumb {
