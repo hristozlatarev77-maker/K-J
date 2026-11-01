@@ -20,7 +20,7 @@
 
 | Файл | Съдържание |
 |------|------------|
-| `index.html` | Начало — пълен фон `site-background.jpg`, лого, статии, видео, аудио, CSS анимация |
+| `index.html` | Начало — пълен фон `site-background.jpg`, лого, статии, CSS анимация (`rise-in`) |
 | `gallery.html` | Галерия с реални клиентски поръчки + филтър |
 | `about.html` | За K&J и процеса |
 | `contact.html` | Форма за поръчка (изисква вход) + JS валидация |
@@ -48,7 +48,7 @@ assets/media/           — видео (mp4) и аудио (mp3/wav)
 
 1. **Семантични HTML5 тагове** (`header`, `nav`, `article`, `aside`, `section`, `footer`) — на всяка страница.
 2. **Responsive + breakpoints** (~360, ~768, ~992/1024, ~1200) — в `css/styles.css`.
-3. **Съдържание** — текст, графика (лого/поръчки), звук, видео, CSS анимация — `index.html`.
+3. **Съдържание** — текст, графика (лого/поръчки); звук и видео на `about.html`; CSS анимация на началния екран (`rise-in`).
 4. **Формуляр + JS валидация** — `contact.html` + `js/form-validation.js`.
 5. **CSS layout свойства** — `display`, `visibility`, `position`, `float`, `clear`, `opacity`, `overflow`, `vertical-align`.
 6. **Стилове за съдържание** — типография, цветове, линкове, списъци, изображения.
