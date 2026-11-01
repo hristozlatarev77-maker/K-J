@@ -1206,6 +1206,77 @@ legend {
   margin-bottom: 1.1em;
 }
 
+.register-success {
+  margin-top: 0.5em;
+}
+
+.register-success h3 {
+  margin-top: 0;
+  color: var(--rose-deep);
+}
+
+.promo-code-banner {
+  display: block;
+  margin: 0.85em 0;
+  padding: 0.75em 0.9em;
+  border: 2px solid var(--rose-deep);
+  background: rgba(196, 139, 139, 0.18);
+  font-size: 1.05em;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.promo-box {
+  margin: 0 0 1.2em;
+  padding: 1em;
+  border: 1px solid rgba(196, 139, 139, 0.55);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.promo-box h3 {
+  margin-top: 0;
+  font-size: 1.2em;
+}
+
+.promo-apply {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  align-items: center;
+}
+
+.promo-apply input[type="text"] {
+  flex: 1 1 8em;
+  min-width: 7em;
+  padding: 0.6em 0.7em;
+  font: inherit;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid rgba(90, 69, 74, 0.55);
+  background: var(--white);
+  color: var(--ink);
+}
+
+.promo-result {
+  margin: 0.45em 0 0;
+  font-weight: 600;
+  min-height: 1.2em;
+}
+
+.promo-result.is-ok {
+  color: #2f6b4f;
+}
+
+.promo-result.is-bad {
+  color: #8f2f3d;
+}
+
+.auth-dialog .form-group.is-invalid .error-msg {
+  visibility: visible;
+  opacity: 1;
+}
+
 .order-auth-gate[hidden],
 [data-auth-guest][hidden],
 [data-auth-user][hidden],

@@ -55,7 +55,13 @@
       }
       var gateMsg = document.getElementById("order-auth-message");
       if (gateMsg) {
-        gateMsg.textContent = "Моля, влезте или се регистрирайте, за да изпратите поръчка.";
+        gateMsg.innerHTML =
+          'Моля, <button type="button" class="btn-auth btn-auth-solid" data-open-auth="login">влезте</button> или <button type="button" class="btn-auth" data-open-auth="register">се регистрирайте</button>, за да изпратите поръчка.';
+        document.querySelectorAll("#order-auth-gate [data-open-auth]").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            window.KJAuth.openAuthModal(btn.getAttribute("data-open-auth") || "login");
+          });
+        });
       }
       return;
     }
@@ -75,6 +81,8 @@
     var age = form.elements.namedItem("age");
     var website = form.elements.namedItem("website");
     var consent = form.elements.namedItem("consent");
+    var promoInput = document.getElementById("promo-code");
+    var promoGroup = promoInput ? promoInput.closest(".form-group") : null;
 
     if (!name.value || name.value.trim().length < 2) {
       setError(name.closest(".form-group"), "Моля, въведете име с поне 2 символа.");
@@ -126,6 +134,31 @@
       valid = false;
     }
 
+    var promoApplied = false;
+    var promoNote = "";
+    if (promoInput && promoInput.value.trim()) {
+      var promoCheck = window.KJAuth.validatePromoCode(promoInput.value, topic.value);
+      if (!promoCheck.ok) {
+        if (promoGroup) {
+          setError(promoGroup, promoCheck.message);
+        }
+        valid = false;
+      } else if (promoInput.dataset.applied !== window.KJAuth.PROMO_CODE) {
+        if (promoGroup) {
+          setError(promoGroup, "Натиснете „Приложи“, за да потвърдите промо кода преди изпращане.");
+        }
+        valid = false;
+      } else {
+        promoApplied = true;
+        promoNote =
+          " Промо KJ15: " +
+          promoCheck.basePrice +
+          " лв → " +
+          promoCheck.finalPrice +
+          " лв (−15%).";
+      }
+    }
+
     if (!valid) {
       var firstInvalid = form.querySelector(".is-invalid");
       if (firstInvalid) {
@@ -137,10 +170,30 @@
       return;
     }
 
+    if (promoApplied) {
+      window.KJAuth.markPromoUsed();
+    }
+
     if (success) {
+      success.textContent =
+        "Благодарим! Поръчката е приета (демо)." +
+        (promoApplied ? promoNote : "") +
+        " Няма сървърно изпращане.";
       success.classList.add("is-visible");
       success.focus();
     }
     form.reset();
+    if (promoInput) {
+      promoInput.dataset.applied = "";
+      delete promoInput.dataset.finalPrice;
+    }
+    var promoResult = document.getElementById("promo-result");
+    if (promoResult) {
+      promoResult.textContent = "";
+      promoResult.classList.remove("is-ok", "is-bad");
+    }
+    if (window.KJAuth.updateAuthUI) {
+      window.KJAuth.updateAuthUI();
+    }
   });
 })();

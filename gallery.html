@@ -170,19 +170,18 @@
         <button type="button" id="auth-tab-register" role="tab" aria-selected="false">Регистрация</button>
       </div>
 
-      <div id="auth-panel-login" class="auth-panel" role="tabpanel">
+            <div id="auth-panel-login" class="auth-panel" role="tabpanel">
         <h2 id="auth-dialog-title">Вход в K&amp;J Art</h2>
         <form id="login-form" action="#" method="post" novalidate>
           <div class="form-group">
             <label for="login-email">Имейл *</label>
             <input type="email" id="login-email" name="email" autocomplete="email" required placeholder="ime@example.com">
+            <span class="error-msg" role="alert"></span>
           </div>
           <div class="form-group">
             <label for="login-password">Парола *</label>
             <input type="password" id="login-password" name="password" autocomplete="current-password" required minlength="6">
-          </div>
-          <div class="form-group">
-            <span id="login-error" class="error-msg" role="alert" style="visibility:visible;opacity:1;min-height:1.2em"></span>
+            <span class="error-msg" role="alert"></span>
           </div>
           <button class="btn" type="submit">Влез</button>
         </form>
@@ -194,21 +193,33 @@
           <div class="form-group">
             <label for="register-name">Име *</label>
             <input type="text" id="register-name" name="name" autocomplete="name" required minlength="2" placeholder="Вашето име">
+            <span class="error-msg" role="alert"></span>
           </div>
           <div class="form-group">
             <label for="register-email">Имейл *</label>
             <input type="email" id="register-email" name="email" autocomplete="email" required placeholder="ime@example.com">
+            <span class="error-msg" role="alert"></span>
           </div>
           <div class="form-group">
             <label for="register-password">Парола *</label>
             <input type="password" id="register-password" name="password" autocomplete="new-password" required minlength="6">
-            <span class="hint">Минимум 6 символа. Данните се пазят локално в браузъра (учебен демо режим).</span>
+            <span class="hint">Минимум 6 символа. Данните се пазят локално в браузъра (учебен демо).</span>
+            <span class="error-msg" role="alert"></span>
           </div>
           <div class="form-group">
-            <span id="register-error" class="error-msg" role="alert" style="visibility:visible;opacity:1;min-height:1.2em"></span>
+            <label for="register-password-confirm">Повторете паролата *</label>
+            <input type="password" id="register-password-confirm" name="passwordConfirm" autocomplete="new-password" required minlength="6">
+            <span class="error-msg" role="alert"></span>
           </div>
           <button class="btn" type="submit">Създай профил</button>
         </form>
+        <div id="register-success" class="register-success" hidden>
+          <h3>Готово — добре дошли!</h3>
+          <p>Вашият профил е създаден. За първа поръчка на <strong>карикатура</strong> използвайте промо код:</p>
+          <p class="promo-code-banner">Код: <strong id="promo-code-value">KJ15</strong> — <strong>15% отстъпка</strong></p>
+          <p class="hint">Кодът важи еднократно за първа карикатура. Запишете го или го приложете във формата за поръчка.</p>
+          <button type="button" class="btn" id="promo-done">Към сайта</button>
+        </div>
       </div>
     </div>
   </div>
