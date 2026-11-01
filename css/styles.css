@@ -977,10 +977,6 @@ legend {
     min-height: 78vh;
   }
 
-  .site-parallax-layer {
-    opacity: 0.4;
-  }
-
   .side-ribbon {
     right: 0.5em;
   }
@@ -1051,11 +1047,6 @@ legend {
   .hero-lead,
   .hero-actions {
     animation: none;
-  }
-
-  .hero-parallax,
-  .site-parallax-layer {
-    transform: none !important;
   }
 }
 
