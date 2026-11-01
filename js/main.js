@@ -39,57 +39,45 @@
     year.textContent = String(new Date().getFullYear());
   }
 
-  /* Parallax + clearer background on scroll (less cream wash) */
-  var heroLayer = document.querySelector("[data-parallax-hero]");
-  var siteLayer = document.querySelector("[data-parallax-site]");
+  /*
+   * Fixed single background — no translate / no duplicate image.
+   * On scroll only the cream scrim fades so colors look clearer.
+   */
   var siteScrim = document.querySelector(".site-parallax-scrim");
   var heroEl = document.querySelector(".hero");
   var pageEls = document.querySelectorAll(".page-atmosphere");
-  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var ticking = false;
 
   function clamp(n, min, max) {
     return Math.max(min, Math.min(max, n));
   }
 
-  function updateParallax() {
+  function updateBackgroundClarity() {
     ticking = false;
     var y = window.pageYOffset || document.documentElement.scrollTop || 0;
-    var progress = clamp(y / Math.max(window.innerHeight * 0.85, 1), 0, 1);
+    var progress = clamp(y / Math.max(window.innerHeight * 0.9, 1), 0, 1);
 
-    if (!reduceMotion) {
-      if (heroLayer) {
-        heroLayer.style.transform = "translate3d(0, " + y * 0.42 + "px, 0)";
-      }
-      if (siteLayer) {
-        siteLayer.style.transform = "translate3d(0, " + y * 0.28 + "px, 0)";
-      }
-    }
-
-    /* As user scrolls: stronger/vivid bg, lighter scrim */
-    if (siteLayer) {
-      var baseOpacity = window.matchMedia("(max-width: 767px)").matches ? 0.38 : 0.55;
-      siteLayer.style.opacity = String(baseOpacity + progress * 0.4);
-    }
     if (siteScrim) {
-      siteScrim.style.opacity = String(1 - progress * 0.78);
+      /* Start readable, become more vivid (less wash) while scrolling */
+      siteScrim.style.opacity = String(0.72 - progress * 0.55);
     }
     if (heroEl) {
-      heroEl.style.setProperty("--hero-scrim", String(1 - progress * 0.65));
+      heroEl.style.setProperty("--hero-scrim", String(1 - progress * 0.7));
     }
     for (var i = 0; i < pageEls.length; i++) {
-      pageEls[i].style.background = "rgba(250, 244, 242, " + (0.78 - progress * 0.42) + ")";
+      pageEls[i].style.background =
+        "rgba(250, 244, 242, " + (0.4 - progress * 0.22) + ")";
     }
   }
 
   function onScroll() {
     if (!ticking) {
       ticking = true;
-      window.requestAnimationFrame(updateParallax);
+      window.requestAnimationFrame(updateBackgroundClarity);
     }
   }
 
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll, { passive: true });
-  updateParallax();
+  updateBackgroundClarity();
 })();
