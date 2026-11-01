@@ -7,6 +7,15 @@
   }
 
   var success = document.getElementById("form-success");
+  var dateInput = document.getElementById("date");
+  var MAX_REFERENCE_FILES = 10;
+  var ALLOWED_IMAGE_TYPES = {
+    "image/jpeg": true,
+    "image/png": true,
+    "image/gif": true,
+    "image/webp": true
+  };
+  var ALLOWED_IMAGE_EXT = /\.(jpe?g|png|gif|webp)$/i;
 
   function setError(group, message) {
     group.classList.add("is-invalid");
@@ -29,11 +38,71 @@
   }
 
   function validatePhone(value) {
-    if (!value) {
-      return true;
-    }
     return /^[+0-9\s()-]{7,20}$/.test(value);
   }
+
+  function pad2(n) {
+    return n < 10 ? "0" + n : String(n);
+  }
+
+  function formatDateISO(date) {
+    return (
+      date.getFullYear() +
+      "-" +
+      pad2(date.getMonth() + 1) +
+      "-" +
+      pad2(date.getDate())
+    );
+  }
+
+  function minReadyDate() {
+    var d = new Date();
+    d.setHours(0, 0, 0, 0);
+    d.setDate(d.getDate() + 3);
+    return d;
+  }
+
+  function applyDateMin() {
+    if (!dateInput) {
+      return;
+    }
+    dateInput.min = formatDateISO(minReadyDate());
+  }
+
+  function parseISODate(value) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(value || "")) {
+      return null;
+    }
+    var parts = value.split("-");
+    var y = Number(parts[0]);
+    var m = Number(parts[1]);
+    var day = Number(parts[2]);
+    var d = new Date(y, m - 1, day);
+    if (
+      d.getFullYear() !== y ||
+      d.getMonth() !== m - 1 ||
+      d.getDate() !== day
+    ) {
+      return null;
+    }
+    d.setHours(0, 0, 0, 0);
+    return d;
+  }
+
+  function isAllowedImageFile(file) {
+    if (!file) {
+      return false;
+    }
+    if (file.type && ALLOWED_IMAGE_TYPES[file.type]) {
+      return true;
+    }
+    if (!file.type && ALLOWED_IMAGE_EXT.test(file.name || "")) {
+      return true;
+    }
+    return ALLOWED_IMAGE_TYPES[file.type] === true;
+  }
+
+  applyDateMin();
 
   form.addEventListener("input", function (event) {
     var field = event.target;
@@ -46,8 +115,19 @@
     }
   });
 
+  form.addEventListener("change", function (event) {
+    var field = event.target;
+    if (field && field.type === "file") {
+      var group = field.closest(".form-group");
+      if (group && group.classList.contains("is-invalid")) {
+        clearError(group);
+      }
+    }
+  });
+
   form.addEventListener("submit", function (event) {
     event.preventDefault();
+    applyDateMin();
 
     if (!window.KJAuth || !window.KJAuth.isLoggedIn()) {
       if (window.KJAuth && window.KJAuth.openAuthModal) {
@@ -76,10 +156,12 @@
     var name = form.elements.namedItem("name");
     var email = form.elements.namedItem("email");
     var phone = form.elements.namedItem("phone");
+    var people = form.elements.namedItem("people");
+    var date = form.elements.namedItem("date");
+    var references = form.elements.namedItem("references");
     var topic = form.elements.namedItem("topic");
+    var theme = form.elements.namedItem("theme");
     var message = form.elements.namedItem("message");
-    var age = form.elements.namedItem("age");
-    var website = form.elements.namedItem("website");
     var consent = form.elements.namedItem("consent");
     var promoInput = document.getElementById("promo-code");
     var promoGroup = promoInput ? promoInput.closest(".form-group") : null;
@@ -94,31 +176,85 @@
       valid = false;
     }
 
-    if (!validatePhone(phone.value.trim())) {
-      setError(phone.closest(".form-group"), "Телефонът съдържа невалидни символи.");
+    if (!phone.value || !phone.value.trim()) {
+      setError(phone.closest(".form-group"), "Моля, въведете телефонен номер.");
+      valid = false;
+    } else if (!validatePhone(phone.value.trim())) {
+      setError(
+        phone.closest(".form-group"),
+        "Телефонът трябва да е 7–20 символа (цифри, интервали, +, -, ())."
+      );
       valid = false;
     }
 
-    if (!topic.value) {
-      setError(topic.closest(".form-group"), "Изберете тема на запитването.");
-      valid = false;
-    }
-
-    if (!message.value || message.value.trim().length < 10) {
-      setError(message.closest(".form-group"), "Съобщението трябва да е поне 10 символа.");
-      valid = false;
-    }
-
-    if (age.value !== "") {
-      var ageNum = Number(age.value);
-      if (isNaN(ageNum) || ageNum < 12 || ageNum > 120) {
-        setError(age.closest(".form-group"), "Възрастта трябва да е между 12 и 120.");
+    if (people && people.value !== "") {
+      var peopleNum = Number(people.value);
+      if (isNaN(peopleNum) || peopleNum < 1 || peopleNum > 20) {
+        setError(people.closest(".form-group"), "Броят хора трябва да е между 1 и 20.");
         valid = false;
       }
     }
 
-    if (website.value && !/^https?:\/\/.+\..+/.test(website.value.trim())) {
-      setError(website.closest(".form-group"), "URL адресът трябва да започва с http:// или https://");
+    if (!date.value) {
+      setError(date.closest(".form-group"), "Моля, изберете желана дата за готовност.");
+      valid = false;
+    } else {
+      var chosen = parseISODate(date.value);
+      var minDate = minReadyDate();
+      if (!chosen) {
+        setError(date.closest(".form-group"), "Невалидна дата.");
+        valid = false;
+      } else if (chosen.getTime() < minDate.getTime()) {
+        setError(
+          date.closest(".form-group"),
+          "Датата трябва да е най-рано " + formatDateISO(minDate) + " (днес + 3 дни)."
+        );
+        valid = false;
+      }
+    }
+
+    if (references && references.files && references.files.length) {
+      var files = references.files;
+      if (files.length > MAX_REFERENCE_FILES) {
+        setError(
+          references.closest(".form-group"),
+          "Можете да качите най-много " + MAX_REFERENCE_FILES + " изображения."
+        );
+        valid = false;
+      } else {
+        var badNames = [];
+        for (var f = 0; f < files.length; f++) {
+          if (!isAllowedImageFile(files[f])) {
+            badNames.push(files[f].name || "файл");
+          }
+        }
+        if (badNames.length) {
+          setError(
+            references.closest(".form-group"),
+            "Позволени са само JPG, PNG, GIF или WebP. Невалидни: " +
+              badNames.slice(0, 3).join(", ") +
+              (badNames.length > 3 ? "…" : "")
+          );
+          valid = false;
+        }
+      }
+    }
+
+    if (!topic.value) {
+      setError(topic.closest(".form-group"), "Изберете вид на поръчката.");
+      valid = false;
+    }
+
+    if (!theme.value || theme.value.trim().length < 5) {
+      setError(theme.closest(".form-group"), "Опишете темата/повода с поне 5 символа.");
+      valid = false;
+    }
+
+    if (message.value && message.value.trim().length > 0 && message.value.trim().length < 10) {
+      setError(
+        message.closest(".form-group"),
+        "Ако попълвате допълнителни детайли, въведете поне 10 символа."
+      );
       valid = false;
     }
 
@@ -174,15 +310,19 @@
       window.KJAuth.markPromoUsed();
     }
 
+    var fileCount =
+      references && references.files ? references.files.length : 0;
     if (success) {
       success.textContent =
         "Благодарим! Поръчката е приета (демо)." +
+        (fileCount ? " Качени референции: " + fileCount + "." : "") +
         (promoApplied ? promoNote : "") +
         " Няма сървърно изпращане.";
       success.classList.add("is-visible");
       success.focus();
     }
     form.reset();
+    applyDateMin();
     if (promoInput) {
       promoInput.dataset.applied = "";
       delete promoInput.dataset.finalPrice;

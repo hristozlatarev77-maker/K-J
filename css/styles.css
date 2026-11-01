@@ -898,6 +898,7 @@ code {
 .form-group input[type="number"],
 .form-group input[type="date"],
 .form-group input[type="url"],
+.form-group input[type="file"],
 .form-group select,
 .form-group textarea {
   width: 100%;

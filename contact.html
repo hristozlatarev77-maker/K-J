@@ -68,7 +68,7 @@
           <div id="order-auth-gate" class="order-auth-gate">
             <p id="order-auth-message">За да изпратите поръчка, моля <button type="button" class="btn-auth btn-auth-solid" data-open-auth="login">влезте</button> или <button type="button" class="btn-auth" data-open-auth="register">се регистрирайте</button>.</p>
           </div>
-          <form id="contact-form" action="#" method="post" novalidate>
+          <form id="contact-form" action="#" method="post" enctype="multipart/form-data" novalidate>
             <div class="form-group">
               <label for="name">Име *</label>
               <input type="text" id="name" name="name" autocomplete="name" required minlength="2" placeholder="напр. Мария Иванова">
@@ -82,32 +82,35 @@
             </div>
 
             <div class="form-group">
-              <label for="phone">Телефон</label>
-              <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+359 ...">
-              <span class="hint">По желание. Позволени: цифри, интервали, +, -, ().</span>
+              <label for="phone">Телефон *</label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" required placeholder="+359 ...">
+              <span class="hint">Задължително. Позволени: цифри, интервали, +, -, ().</span>
               <span class="error-msg" role="alert"></span>
             </div>
 
             <div class="form-group">
-              <label for="age">Възраст</label>
-              <input type="number" id="age" name="age" min="12" max="120" step="1" placeholder="напр. 21">
+              <label for="people">Брой хора</label>
+              <input type="number" id="people" name="people" min="1" max="20" step="1" placeholder="напр. 2">
+              <span class="hint">По желание — колко души да са на рисунката.</span>
               <span class="error-msg" role="alert"></span>
             </div>
 
             <div class="form-group">
-              <label for="date">Желана дата за готовност</label>
-              <input type="date" id="date" name="date">
+              <label for="date">Желана дата за готовност *</label>
+              <input type="date" id="date" name="date" required>
+              <span class="hint">Най-рано след 3 дни от днес.</span>
               <span class="error-msg" role="alert"></span>
             </div>
 
             <div class="form-group">
-              <label for="website">Линк към референтна снимка</label>
-              <input type="url" id="website" name="website" placeholder="https://...">
+              <label for="references">Референтни снимки</label>
+              <input type="file" id="references" name="references" accept="image/jpeg,image/png,image/gif,image/webp,.jpg,.jpeg,.png,.gif,.webp" multiple>
+              <span class="hint">До 10 изображения (JPG, PNG, GIF или WebP).</span>
               <span class="error-msg" role="alert"></span>
             </div>
 
             <div class="form-group">
-              <label for="topic">Тема *</label>
+              <label for="topic">Вид поръчка *</label>
               <select id="topic" name="topic" required>
                 <option value="">— изберете —</option>
                 <option value="portrait">Портрет</option>
@@ -139,8 +142,16 @@
             </fieldset>
 
             <div class="form-group">
-              <label for="message">Съобщение *</label>
-              <textarea id="message" name="message" required minlength="10" placeholder="Опишете повода, броя хора и стила..."></textarea>
+              <label for="theme">Тема / повод *</label>
+              <textarea id="theme" name="theme" required minlength="5" rows="3" placeholder="напр. рожден ден, абитуриентски бал, семеен портрет..."></textarea>
+              <span class="hint">Опишете темата или повода на рисунката.</span>
+              <span class="error-msg" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="message">допълнителни детайли и уточняваща информация</label>
+              <textarea id="message" name="message" minlength="10" rows="4" placeholder="Цветове, композиция, текст в рисунката и др."></textarea>
+              <span class="hint">По желание, минимум 10 символа ако попълните полето.</span>
               <span class="error-msg" role="alert"></span>
             </div>
 
@@ -186,7 +197,7 @@
           <article class="article-panel">
             <h3>Типове полета във формата</h3>
             <ul>
-              <li>text, email, tel, number, date, url</li>
+              <li>text, email, tel, number, date, file</li>
               <li>select, textarea</li>
               <li>checkbox и radio</li>
             </ul>
