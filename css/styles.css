@@ -224,10 +224,21 @@ code {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.35em 1.1em;
+  gap: 0.35em 0.55em;
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.nav-bar > .auth-nav-item {
+  order: 0;
+}
+
+.nav-bar > .nav-dropdown {
+  order: 1;
+  margin-left: 1.35em;
+  padding-left: 1.35em;
+  border-left: 1px solid rgba(196, 139, 139, 0.45);
 }
 
 .site-nav a {
@@ -923,6 +934,15 @@ code {
   resize: vertical;
 }
 
+.form-group textarea#theme {
+  min-height: 5em;
+}
+
+.form-group input[type="file"] {
+  padding: 0.55em 0.35em;
+  background: rgba(255, 255, 255, 0.95);
+}
+
 .choice-row {
   display: flex;
   flex-wrap: wrap;
@@ -1077,8 +1097,14 @@ legend {
     padding-bottom: 0.5em;
   }
 
-  .nav-dropdown {
+  .nav-bar > .nav-dropdown {
     width: 100%;
+    margin-left: 0;
+    margin-top: 0.45em;
+    padding-left: 0;
+    padding-top: 0.55em;
+    border-left: 0;
+    border-top: 1px solid rgba(196, 139, 139, 0.45);
   }
 
   .nav-dropdown-toggle {
