@@ -12,6 +12,20 @@
 | `about.html` | История и техники |
 | `contact.html` | Форма с различни типове полета и JS валидация |
 
+## Публичен адрес (GitHub Pages)
+
+Целеви URL след включване на Pages:
+
+**https://hristozlatarev77-maker.github.io/K-J/**
+
+Сайтът е в корена на клон `main` (има и `.nojekyll`). Ако адресът още не отваря страницата, включете Pages така (нужни са права на собственика):
+
+1. Отворете <https://github.com/hristozlatarev77-maker/K-J/settings> → **General** → **Danger Zone** → **Change repository visibility** → **Public** (на безплатен план Pages изисква публично хранилище).
+2. Отворете <https://github.com/hristozlatarev77-maker/K-J/settings/pages>.
+3. **Build and deployment** → **Source**: *Deploy from a branch*.
+4. **Branch**: `main`, папка: `/ (root)` → **Save**.
+5. Изчакайте 1–2 минути и отворете https://hristozlatarev77-maker.github.io/K-J/
+
 ## Как да отворите локално
 
 ### Вариант 1 — директно във файловия мениджър
