@@ -1206,24 +1206,79 @@ legend {
   margin-bottom: 1.1em;
 }
 
-.register-success {
-  margin-top: 0.5em;
+.promo-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
+  background: rgba(20, 14, 16, 0.72);
+  visibility: hidden;
+  opacity: 0;
+  overflow: auto;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
-.register-success h3 {
+.promo-overlay.is-open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.promo-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 24em;
+  background: var(--cream);
+  border: 2px solid var(--rose-deep);
+  padding: 1.4em 1.45em 1.55em;
+  box-shadow: 0 12px 40px rgba(20, 14, 16, 0.35);
+}
+
+.promo-dialog h2 {
   margin-top: 0;
   color: var(--rose-deep);
 }
 
+.promo-code-panel {
+  display: block;
+  margin: 0.9em 0 1em;
+  padding: 0.95em 1em;
+  border: 2px solid var(--rose-deep);
+  background: rgba(255, 255, 255, 0.98);
+}
+
+.promo-code-panel label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 0.4em;
+}
+
+.promo-code-field {
+  display: block;
+  width: 100%;
+  margin: 0 0 0.65em;
+  padding: 0.7em 0.75em;
+  font: inherit;
+  font-size: 1.25em;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--ink);
+  border: 2px solid var(--rose);
+  background: rgba(250, 244, 242, 0.95);
+}
+
 .promo-code-banner {
   display: block;
-  margin: 0.85em 0;
-  padding: 0.75em 0.9em;
-  border: 2px solid var(--rose-deep);
-  background: rgba(196, 139, 139, 0.18);
-  font-size: 1.05em;
+  margin: 0;
+  padding: 0.55em 0.35em 0;
+  font-size: 1.02em;
   letter-spacing: 0.02em;
   text-align: center;
+  color: var(--ink);
 }
 
 .promo-box {

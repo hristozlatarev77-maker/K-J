@@ -213,18 +213,25 @@
           </div>
           <button class="btn" type="submit">Създай профил</button>
         </form>
-                <div id="register-success" class="register-success" hidden>
-          <h3>Готово — добре дошли!</h3>
-          <p>Профилът е създаден. Запазете промо кода за първа карикатура (−15%):</p>
-          <div class="promo-code-panel">
-            <label for="promo-code-field">Вашият промо код</label>
-            <input type="text" id="promo-code-field" class="promo-code-field" value="KJ15" readonly>
-            <p class="promo-code-banner">Код: <strong id="promo-code-value">KJ15</strong> — <strong>15% отстъпка</strong></p>
-          </div>
           <p class="hint">Натиснете „Продължи“, за да влезете в профила си.</p>
           <button type="button" class="btn" id="promo-continue">Продължи</button>
         </div>
       </div>
+    </div>
+  </div>
+
+
+  <div id="promo-overlay" class="promo-overlay" aria-hidden="true">
+    <div class="promo-dialog" role="dialog" aria-modal="true" aria-labelledby="promo-dialog-title">
+      <h2 id="promo-dialog-title">Вашият промо код</h2>
+      <p>Регистрацията е успешна. За първа поръчка на <strong>карикатура</strong> ползвайте:</p>
+      <div class="promo-code-panel">
+        <label for="promo-code-field">Промо код</label>
+        <input type="text" id="promo-code-field" class="promo-code-field" value="KJ15" readonly>
+        <p class="promo-code-banner"><strong id="promo-code-value">KJ15</strong> — <strong>15% отстъпка</strong></p>
+      </div>
+      <p class="hint">Запишете кода. След „Продължи“ ще отворим формата за вход.</p>
+      <button type="button" class="btn" id="promo-continue">Продължи</button>
     </div>
   </div>
 

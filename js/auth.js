@@ -157,7 +157,9 @@
     if (findUser(email)) {
       return {
         ok: false,
-        errors: { email: "Този имейл вече е регистриран. Влезте с профила си." }
+        errors: {
+          email: "Този имейл вече е регистриран. Моля, влезте с този профил или използвайте друг имейл."
+        }
       };
     }
 
@@ -280,10 +282,10 @@
     if (!overlay) {
       return;
     }
+    closePromoModal(true);
     overlay.classList.add("is-open");
     overlay.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
-    hideRegisterSuccess();
     switchTab(tab || "login");
   }
 
@@ -294,8 +296,9 @@
     }
     overlay.classList.remove("is-open");
     overlay.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
-    hideRegisterSuccess();
+    if (!isPromoOpen()) {
+      document.body.style.overflow = "";
+    }
   }
 
   function switchTab(tab) {
@@ -306,7 +309,6 @@
     if (!loginPanel || !registerPanel) {
       return;
     }
-    hideRegisterSuccess();
     var isLogin = tab !== "register";
     loginPanel.hidden = !isLogin;
     registerPanel.hidden = isLogin;
@@ -322,40 +324,53 @@
 
   var pendingLoginEmail = "";
 
-  function showRegisterSuccess(promoCode, email) {
-    var panel = document.getElementById("register-success");
-    var form = document.getElementById("register-form");
+  function isPromoOpen() {
+    var overlay = document.getElementById("promo-overlay");
+    return !!(overlay && overlay.classList.contains("is-open"));
+  }
+
+  function showPromoModal(promoCode, email) {
+    var overlay = document.getElementById("promo-overlay");
     var codeEl = document.getElementById("promo-code-value");
     var codeField = document.getElementById("promo-code-field");
     pendingLoginEmail = email || "";
-    if (form) {
-      form.hidden = true;
+    closeAuthModal();
+    if (!overlay) {
+      return;
     }
-    if (panel) {
-      panel.hidden = false;
-      if (codeEl) {
-        codeEl.textContent = promoCode || PROMO_CODE;
-      }
-      if (codeField) {
-        codeField.value = promoCode || PROMO_CODE;
-      }
+    if (codeEl) {
+      codeEl.textContent = promoCode || PROMO_CODE;
+    }
+    if (codeField) {
+      codeField.value = promoCode || PROMO_CODE;
+    }
+    overlay.classList.add("is-open");
+    overlay.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    var continueBtn = document.getElementById("promo-continue");
+    if (continueBtn) {
+      continueBtn.focus();
     }
   }
 
-  function hideRegisterSuccess() {
-    var panel = document.getElementById("register-success");
-    var form = document.getElementById("register-form");
-    if (panel) {
-      panel.hidden = true;
+  function closePromoModal(keepBodyLock) {
+    var overlay = document.getElementById("promo-overlay");
+    if (!overlay) {
+      return;
     }
-    if (form) {
-      form.hidden = false;
+    overlay.classList.remove("is-open");
+    overlay.setAttribute("aria-hidden", "true");
+    if (!keepBodyLock) {
+      var auth = document.getElementById("auth-overlay");
+      if (!(auth && auth.classList.contains("is-open"))) {
+        document.body.style.overflow = "";
+      }
     }
   }
 
   function continueToLogin() {
-    hideRegisterSuccess();
-    switchTab("login");
+    closePromoModal(true);
+    openAuthModal("login");
     var loginForm = document.getElementById("login-form");
     if (loginForm) {
       clearFieldErrors(loginForm);
@@ -554,7 +569,7 @@
         }
         var registeredEmail = result.user.email;
         registerForm.reset();
-        showRegisterSuccess(result.promoCode, registeredEmail);
+        showPromoModal(result.promoCode, registeredEmail);
       });
     }
 
