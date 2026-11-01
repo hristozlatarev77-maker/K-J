@@ -8,12 +8,16 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <div class="site-parallax" aria-hidden="true">
+    <div class="site-parallax-layer" data-parallax-site></div>
+    <div class="site-parallax-scrim"></div>
+  </div>
   <a class="skip-link" href="#main">Към съдържанието</a>
 
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="index.html">
-        <img class="brand-logo" src="assets/brand/logo-kj-art.png" width="1254" height="1254" alt="">
+        <img class="brand-logo" src="assets/brand/logo-kj-art-clean.png" width="352" height="347" alt="">
         <span class="brand-text">
           <span class="brand-mark">K<span>&amp;</span>J Art</span>
           <span class="brand-tag">ателие</span>
@@ -32,10 +36,11 @@
   </header>
 
   <section class="hero" aria-label="Начален екран K&amp;J Art">
-    <img class="hero-media" src="assets/brand/site-background.jpg" width="1254" height="1254" alt="Илюстрация на K&amp;J Art — двете създателки в творческо ателие">
+    <div class="hero-parallax" data-parallax-hero>
+      <img class="hero-parallax-img" src="assets/brand/site-background.jpg" width="1254" height="1254" alt="Илюстрация на K&amp;J Art — двете създателки в творческо ателие">
+    </div>
     <div class="hero-content">
-      <img class="hero-logo" src="assets/brand/logo-kj-art.png" width="1254" height="1254" alt="K&amp;J Art — лого">
-      <p class="hero-brand">K<span>&amp;</span>J Art</p>
+<p class="hero-brand">K<span>&amp;</span>J Art</p>
       <p class="hero-lead">Портрети, карикатури и спомени — превръщаме специалните моменти в усмивки и изкуство.</p>
       <div class="hero-actions">
         <a class="btn" href="gallery.html">Виж поръчките</a>
@@ -124,7 +129,7 @@
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <img src="assets/brand/logo-kj-art.png" width="1254" height="1254" alt="">
+        <img src="assets/brand/logo-kj-art-clean.png" width="352" height="347" alt="">
         <div>
           <strong>K&amp;J Art</strong>
           <p>Портрети · Карикатури · Спомени</p>

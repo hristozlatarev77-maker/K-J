@@ -38,4 +38,37 @@
   if (year) {
     year.textContent = String(new Date().getFullYear());
   }
+
+  /* Floating / falling parallax: background drifts downward on scroll */
+  var heroLayer = document.querySelector("[data-parallax-hero]");
+  var siteLayer = document.querySelector("[data-parallax-site]");
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var ticking = false;
+
+  function updateParallax() {
+    ticking = false;
+    if (reduceMotion) {
+      return;
+    }
+    var y = window.pageYOffset || document.documentElement.scrollTop || 0;
+    /* Positive translateY = drifts / falls downward as the page scrolls down */
+    if (heroLayer) {
+      heroLayer.style.transform = "translate3d(0, " + (y * 0.42) + "px, 0)";
+    }
+    if (siteLayer) {
+      siteLayer.style.transform = "translate3d(0, " + (y * 0.28) + "px, 0)";
+    }
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      ticking = true;
+      window.requestAnimationFrame(updateParallax);
+    }
+  }
+
+  if ((heroLayer || siteLayer) && !reduceMotion) {
+    window.addEventListener("scroll", onScroll, { passive: true });
+    updateParallax();
+  }
 })();
