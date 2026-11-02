@@ -3,42 +3,76 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Контактна форма за идеи, въпроси и обратна връзка относно карикатурите.">
-  <title>Карикатури — Контакт</title>
+  <meta name="description" content="Контакт и поръчка към K&amp;J Art — портрети и карикатури.">
+  <title>K&amp;J Art — Контакт</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <div class="site-parallax" aria-hidden="true">
+    <div class="site-parallax-layer" data-parallax-site></div>
+    <div class="site-parallax-scrim"></div>
+  </div>
   <a class="skip-link" href="#main">Към съдържанието</a>
 
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="index.html">
-        <span class="brand-mark">Карика<span>тури</span></span>
-        <span class="brand-tag">ателие</span>
+        <img class="brand-logo" src="assets/brand/logo-kj-art-final.png" width="1254" height="1254" alt="">
+        <span class="brand-text">
+          <span class="brand-mark">K<span>&amp;</span>J Art</span>
+          <span class="brand-tag">ателие</span>
+        </span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Меню</button>
       <nav class="site-nav" id="primary-nav" aria-label="Главна навигация">
-        <ul>
-          <li><a href="index.html">Начало</a></li>
-          <li><a href="gallery.html">Галерия</a></li>
-          <li><a href="about.html">За карикатурата</a></li>
-          <li><a href="contact.html" aria-current="page">Контакт</a></li>
+                <ul class="nav-bar">
+          <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-toggle is-current" id="nav-pages-btn" aria-expanded="false" aria-controls="nav-pages-menu" aria-haspopup="true">
+              Контакт
+              <span class="nav-dropdown-caret" aria-hidden="true"></span>
+            </button>
+            <ul class="nav-dropdown-menu" id="nav-pages-menu" hidden>
+              <li><a href="index.html">Начало</a></li>
+              <li><a href="gallery.html">Галерия</a></li>
+              <li><a href="about.html">За нас</a></li>
+              <li><a href="contact.html" aria-current="page">Контакт</a></li>
+            </ul>
+          </li>
+          <li class="auth-nav-cluster">
+            <ul class="auth-nav">
+              <li class="auth-nav-item" data-auth-guest>
+                <button type="button" class="btn-auth" data-open-auth="login">Вход</button>
+              </li>
+              <li class="auth-nav-item" data-auth-guest>
+                <button type="button" class="btn-auth btn-auth-solid" data-open-auth="register">Регистрация</button>
+              </li>
+              <li class="auth-nav-item" data-auth-user hidden>
+                <span class="auth-chip">Здравей, <strong data-auth-name></strong></span>
+              </li>
+              <li class="auth-nav-item" data-auth-user hidden>
+                <button type="button" class="btn-auth" id="auth-logout">Изход</button>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main id="main" class="page">
+  <main id="main" class="page page-atmosphere">
     <section class="section" aria-labelledby="contact-title">
       <header class="section-head">
         <h1 id="contact-title">Контакт</h1>
-        <p>Изпратете идея за карикатура, въпрос към курса или обратна връзка. Формата се валидира с JavaScript в браузъра.</p>
+        <p>Поръчайте портрет или карикатура. Влезте в профила си или се регистрирайте, за да изпратите заявка.</p>
       </header>
 
       <div class="contact-layout">
         <article class="form-panel">
-          <h2>Форма за запитване</h2>
-          <form id="contact-form" action="#" method="post" novalidate>
+          <h2>Форма за поръчка</h2>
+          <div id="order-auth-gate" class="order-auth-gate">
+            <p id="order-auth-message">За да изпратите поръчка, моля <button type="button" class="btn-auth btn-auth-solid" data-open-auth="login">влезте</button> или <button type="button" class="btn-auth" data-open-auth="register">се регистрирайте</button>.</p>
+          </div>
+          <form id="contact-form" action="#" method="post" enctype="multipart/form-data" novalidate>
             <div class="form-group">
               <label for="name">Име *</label>
               <input type="text" id="name" name="name" autocomplete="name" required minlength="2" placeholder="напр. Мария Иванова">
@@ -52,37 +86,40 @@
             </div>
 
             <div class="form-group">
-              <label for="phone">Телефон</label>
-              <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+359 ...">
-              <span class="hint">По желание. Позволени: цифри, интервали, +, -, ().</span>
+              <label for="phone">Телефон *</label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" required placeholder="+359 ...">
+              <span class="hint">Задължително. Позволени: цифри, интервали, +, -, ().</span>
               <span class="error-msg" role="alert"></span>
             </div>
 
             <div class="form-group">
-              <label for="age">Възраст</label>
-              <input type="number" id="age" name="age" min="12" max="120" step="1" placeholder="напр. 21">
+              <label for="people">Брой хора</label>
+              <input type="number" id="people" name="people" min="1" max="20" step="1" placeholder="напр. 2">
+              <span class="hint">По желание — колко души да са на рисунката.</span>
               <span class="error-msg" role="alert"></span>
             </div>
 
             <div class="form-group">
-              <label for="date">Желана дата за отговор</label>
-              <input type="date" id="date" name="date">
+              <label for="date">Желана дата за готовност *</label>
+              <input type="date" id="date" name="date" required>
+              <span class="hint">Най-рано след 3 дни от днес.</span>
               <span class="error-msg" role="alert"></span>
             </div>
 
             <div class="form-group">
-              <label for="website">Личен сайт / портфолио</label>
-              <input type="url" id="website" name="website" placeholder="https://...">
+              <label for="references">Референтни снимки</label>
+              <input type="file" id="references" name="references" accept="image/jpeg,image/png,image/gif,image/webp,.jpg,.jpeg,.png,.gif,.webp" multiple>
+              <span class="hint">До 10 изображения (JPG, PNG, GIF или WebP). Можете да добавяте накуп или по едно — новите се дописват към избраните.</span>
+              <div id="references-preview" class="file-preview" hidden aria-live="polite"></div>
               <span class="error-msg" role="alert"></span>
             </div>
 
             <div class="form-group">
-              <label for="topic">Тема *</label>
+              <label for="topic">Вид поръчка *</label>
               <select id="topic" name="topic" required>
                 <option value="">— изберете —</option>
-                <option value="idea">Идея за карикатура</option>
-                <option value="course">Въпрос по курса</option>
-                <option value="gallery">Галерия / медии</option>
+                <option value="portrait">Портрет</option>
+                <option value="caricature">Карикатура</option>
                 <option value="other">Друго</option>
               </select>
               <span class="error-msg" role="alert"></span>
@@ -91,10 +128,10 @@
             <fieldset class="requires-choice">
               <legend>Предпочитан стил *</legend>
               <div class="choice-row">
-                <label><input type="checkbox" name="style" value="political"> Политически</label>
-                <label><input type="checkbox" name="style" value="daily"> Битов</label>
-                <label><input type="checkbox" name="style" value="animals"> Животни</label>
-                <label><input type="checkbox" name="style" value="sport"> Спорт</label>
+                <label><input type="checkbox" name="style" value="soft"> Мек портрет</label>
+                <label><input type="checkbox" name="style" value="caricature"> Карикатура</label>
+                <label><input type="checkbox" name="style" value="color"> Цветен</label>
+                <label><input type="checkbox" name="style" value="bw"> Черно-бял</label>
               </div>
               <span class="error-msg" role="alert"></span>
             </fieldset>
@@ -109,11 +146,33 @@
             </fieldset>
 
             <div class="form-group">
-              <label for="message">Съобщение *</label>
-              <textarea id="message" name="message" required minlength="10" placeholder="Опишете идеята или въпроса..."></textarea>
+              <label for="theme">Тема / повод *</label>
+              <textarea id="theme" name="theme" required minlength="5" rows="3" placeholder="напр. рожден ден, абитуриентски бал, семеен портрет..."></textarea>
+              <span class="hint">Опишете темата или повода на рисунката.</span>
               <span class="error-msg" role="alert"></span>
             </div>
 
+            <div class="form-group">
+              <label for="message">допълнителни детайли и уточняваща информация</label>
+              <textarea id="message" name="message" minlength="10" rows="4" placeholder="Цветове, композиция, текст в рисунката и др."></textarea>
+              <span class="hint">По желание, минимум 10 символа ако попълните полето.</span>
+              <span class="error-msg" role="alert"></span>
+            </div>
+
+
+            <div id="promo-box" class="promo-box" hidden>
+              <h3>Промо код</h3>
+              <p id="promo-eligibility" class="hint"></p>
+              <div class="form-group promo-row">
+                <label for="promo-code">Код (напр. KJ15)</label>
+                <div class="promo-apply">
+                  <input type="text" id="promo-code" name="promo" autocomplete="off" placeholder="KJ15">
+                  <button type="button" class="btn-auth btn-auth-solid" id="apply-promo">Приложи</button>
+                </div>
+                <span class="error-msg" role="alert"></span>
+                <p id="promo-result" class="promo-result" role="status"></p>
+              </div>
+            </div>
             <div class="form-group">
               <label>
                 <input type="checkbox" id="consent" name="consent" value="yes" required>
@@ -124,27 +183,27 @@
 
             <button class="btn" type="submit">Изпрати</button>
             <div id="form-success" class="form-success" tabindex="-1" role="status">
-              Благодарим! Формата е валидна. (Демонстрация — няма сървърно изпращане.)
+              Благодарим! Получихме запитването ви и ще се свържем скоро.
             </div>
           </form>
         </article>
 
         <aside aria-label="Информация за контакт">
           <div class="side-panel">
-            <h2>Ателие „Карикатури“</h2>
-            <p>Учебен сайт без реална администрация. Изпращането показва клиентска валидация.</p>
+            <h2>K&amp;J Art</h2>
+            <p>Пишете ни за портрет, карикатура или подарък с история. Работим внимателно по всяка поръчка.</p>
             <ul>
-              <li>Имейл (учебен): cartoons@example.bg</li>
-              <li>Часове: понеделник–петък, 10:00–16:00</li>
+              <li>Имейл: hello@kj-art.bg</li>
+              <li>Отговор: обикновено до 2–3 дни</li>
             </ul>
-            <img src="assets/images/card-daily.svg" width="600" height="450" alt="Битова карикатура">
+            <img src="assets/brand/sample-birthday-dad-1.jpg" width="1290" height="1691" alt="Семейна карикатура от ателието">
           </div>
-          <article class="article-card">
-            <h3>Типове полета във формата</h3>
+          <article class="article-panel">
+            <h3>Какво да подготвите</h3>
             <ul>
-              <li>text, email, tel, number, date, url</li>
-              <li>select, textarea</li>
-              <li>checkbox и radio</li>
+              <li>Ясни референтни снимки</li>
+              <li>Повод и желана дата</li>
+              <li>Предпочитан стил (портрет или карикатура)</li>
             </ul>
           </article>
         </aside>
@@ -154,21 +213,105 @@
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <div>
-        <strong>Карикатури</strong>
-        <p>Курсов проект — Увод в уеб програмирането, ФМИ.</p>
+      <div class="footer-brand">
+        <img src="assets/brand/logo-kj-art-final.png" width="1254" height="1254" alt="">
+        <div>
+          <strong>K&amp;J Art</strong>
+          <p>Портрети · Карикатури · Спомени</p>
+        </div>
       </div>
       <nav aria-label="Връзки в долния колонтитул">
         <ul>
           <li><a href="index.html">Начало</a></li>
           <li><a href="gallery.html">Галерия</a></li>
-          <li><a href="about.html">За карикатурата</a></li>
+          <li><a href="about.html">За нас</a></li>
         </ul>
       </nav>
-      <p class="footer-meta">&copy; <span id="year">2026</span> Курсова работа</p>
+      <p class="footer-meta">&copy; <span id="year">2026</span> K&amp;J Art</p>
     </div>
   </footer>
 
+
+  <div id="auth-overlay" class="auth-overlay" aria-hidden="true">
+    <div class="auth-dialog" role="dialog" aria-modal="true" aria-labelledby="auth-dialog-title">
+      <button type="button" class="auth-close" id="auth-close" aria-label="Затвори">&times;</button>
+      <div class="auth-tabs" role="tablist">
+        <button type="button" id="auth-tab-login" class="is-active" role="tab" aria-selected="true" aria-controls="auth-panel-login">Вход</button>
+        <button type="button" id="auth-tab-register" role="tab" aria-selected="false" aria-controls="auth-panel-register">Регистрация</button>
+      </div>
+
+            <div id="auth-panel-login" class="auth-panel" role="tabpanel" aria-labelledby="auth-tab-login">
+        <h2 id="auth-dialog-title">Вход в K&amp;J Art</h2>
+        <form id="login-form" action="#" method="post" novalidate>
+          <div class="form-group">
+            <label for="login-email">Имейл *</label>
+            <input type="email" id="login-email" name="email" autocomplete="email" required placeholder="ime@example.com">
+            <span class="error-msg" role="alert"></span>
+          </div>
+          <div class="form-group">
+            <label for="login-password">Парола *</label>
+            <input type="password" id="login-password" name="password" autocomplete="current-password" required minlength="6">
+            <span class="error-msg" role="alert"></span>
+          </div>
+          <button class="btn" type="submit">Влез</button>
+        </form>
+      </div>
+
+      <div id="auth-panel-register" class="auth-panel" role="tabpanel" aria-labelledby="auth-tab-register" hidden>
+        <h2>Регистрация</h2>
+        <form id="register-form" action="#" method="post" novalidate>
+          <div class="form-group">
+            <label for="register-name">Име *</label>
+            <input type="text" id="register-name" name="name" autocomplete="name" required minlength="2" placeholder="Вашето име">
+            <span class="error-msg" role="alert"></span>
+          </div>
+          <div class="form-group">
+            <label for="register-email">Имейл *</label>
+            <input type="email" id="register-email" name="email" autocomplete="email" required placeholder="ime@example.com">
+            <span class="error-msg" role="alert"></span>
+          </div>
+          <div class="form-group">
+            <label for="register-password">Парола *</label>
+            <input type="password" id="register-password" name="password" autocomplete="new-password" required minlength="6">
+            <span class="hint">Минимум 6 символа.</span>
+            <span class="error-msg" role="alert"></span>
+          </div>
+          <div class="form-group">
+            <label for="register-password-confirm">Повторете паролата *</label>
+            <input type="password" id="register-password-confirm" name="passwordConfirm" autocomplete="new-password" required minlength="6">
+            <span class="error-msg" role="alert"></span>
+          </div>
+          <button class="btn" type="submit">Създай профил</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="promo-overlay" class="promo-overlay" aria-hidden="true">
+    <div class="promo-dialog" role="dialog" aria-modal="true" aria-labelledby="promo-dialog-title">
+      <h2 id="promo-dialog-title">Вашият промо код</h2>
+      <p>Регистрацията е успешна. За първа поръчка на <strong>карикатура</strong> ползвайте:</p>
+      <div class="promo-code-panel">
+        <label for="promo-code-field">Промо код</label>
+        <div class="promo-code-row">
+          <input type="text" id="promo-code-field" class="promo-code-field" value="KJ15" readonly>
+          <button type="button" class="promo-copy-btn" id="promo-copy-btn" aria-label="Копирай промо кода" title="Копирай">
+            <svg class="promo-copy-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <rect x="9" y="9" width="11" height="11" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/>
+              <path d="M6 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+        <p class="promo-copy-status" id="promo-copy-status" aria-live="polite"></p>
+        <p class="promo-code-banner"><strong id="promo-code-value">KJ15</strong> — <strong>15% отстъпка</strong></p>
+      </div>
+      <p class="hint">Запишете кода. След „Продължи“ ще отворим формата за вход.</p>
+      <button type="button" class="btn" id="promo-continue">Продължи</button>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
   <script src="js/main.js"></script>
   <script src="js/form-validation.js"></script>
 </body>

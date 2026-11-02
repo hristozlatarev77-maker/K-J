@@ -7,6 +7,15 @@
   }
 
   var success = document.getElementById("form-success");
+  var dateInput = document.getElementById("date");
+  var MAX_REFERENCE_FILES = 10;
+  var ALLOWED_IMAGE_TYPES = {
+    "image/jpeg": true,
+    "image/png": true,
+    "image/gif": true,
+    "image/webp": true
+  };
+  var ALLOWED_IMAGE_EXT = /\.(jpe?g|png|gif|webp)$/i;
 
   function setError(group, message) {
     group.classList.add("is-invalid");
@@ -29,11 +38,256 @@
   }
 
   function validatePhone(value) {
-    if (!value) {
-      return true;
-    }
     return /^[+0-9\s()-]{7,20}$/.test(value);
   }
+
+  function pad2(n) {
+    return n < 10 ? "0" + n : String(n);
+  }
+
+  function formatDateISO(date) {
+    return (
+      date.getFullYear() +
+      "-" +
+      pad2(date.getMonth() + 1) +
+      "-" +
+      pad2(date.getDate())
+    );
+  }
+
+  function minReadyDate() {
+    var d = new Date();
+    d.setHours(0, 0, 0, 0);
+    d.setDate(d.getDate() + 3);
+    return d;
+  }
+
+  function applyDateMin() {
+    if (!dateInput) {
+      return;
+    }
+    dateInput.min = formatDateISO(minReadyDate());
+  }
+
+  function parseISODate(value) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(value || "")) {
+      return null;
+    }
+    var parts = value.split("-");
+    var y = Number(parts[0]);
+    var m = Number(parts[1]);
+    var day = Number(parts[2]);
+    var d = new Date(y, m - 1, day);
+    if (
+      d.getFullYear() !== y ||
+      d.getMonth() !== m - 1 ||
+      d.getDate() !== day
+    ) {
+      return null;
+    }
+    d.setHours(0, 0, 0, 0);
+    return d;
+  }
+
+  function isAllowedImageFile(file) {
+    if (!file) {
+      return false;
+    }
+    if (file.type && ALLOWED_IMAGE_TYPES[file.type]) {
+      return true;
+    }
+    if (!file.type && ALLOWED_IMAGE_EXT.test(file.name || "")) {
+      return true;
+    }
+    return ALLOWED_IMAGE_TYPES[file.type] === true;
+  }
+
+  var referencesInput = document.getElementById("references");
+  var referencesPreview = document.getElementById("references-preview");
+  var previewObjectUrls = [];
+  var selectedReferenceFiles = [];
+  var skipReferenceChange = false;
+
+  function clearReferencePreviewUrls() {
+    for (var i = 0; i < previewObjectUrls.length; i++) {
+      try {
+        URL.revokeObjectURL(previewObjectUrls[i]);
+      } catch (err) {
+        /* ignore */
+      }
+    }
+    previewObjectUrls = [];
+  }
+
+  function fileIdentity(file) {
+    return (
+      (file.name || "") +
+      "|" +
+      String(file.size || 0) +
+      "|" +
+      String(file.lastModified || 0) +
+      "|" +
+      (file.type || "")
+    );
+  }
+
+  function syncReferencesInput() {
+    if (!referencesInput) {
+      return;
+    }
+    skipReferenceChange = true;
+    try {
+      var dt = new DataTransfer();
+      for (var i = 0; i < selectedReferenceFiles.length; i++) {
+        dt.items.add(selectedReferenceFiles[i]);
+      }
+      referencesInput.files = dt.files;
+      if (!selectedReferenceFiles.length) {
+        referencesInput.value = "";
+      }
+    } catch (err) {
+      if (!selectedReferenceFiles.length) {
+        try {
+          referencesInput.value = "";
+        } catch (err2) {
+          /* ignore */
+        }
+      }
+    }
+    window.setTimeout(function () {
+      skipReferenceChange = false;
+    }, 0);
+  }
+
+  function clearReferenceSelection() {
+    selectedReferenceFiles = [];
+    clearReferencePreviewUrls();
+    if (referencesPreview) {
+      referencesPreview.innerHTML = "";
+      referencesPreview.hidden = true;
+    }
+    syncReferencesInput();
+  }
+
+  function removeReferenceAt(index) {
+    if (index < 0 || index >= selectedReferenceFiles.length) {
+      return;
+    }
+    selectedReferenceFiles.splice(index, 1);
+    syncReferencesInput();
+    renderReferencePreview();
+  }
+
+  function appendReferenceFiles(fileList) {
+    var incoming = fileList ? Array.prototype.slice.call(fileList, 0) : [];
+    if (!incoming.length) {
+      return { added: 0, skippedDup: 0, skippedLimit: 0 };
+    }
+
+    var existing = {};
+    for (var i = 0; i < selectedReferenceFiles.length; i++) {
+      existing[fileIdentity(selectedReferenceFiles[i])] = true;
+    }
+
+    var added = 0;
+    var skippedDup = 0;
+    var skippedLimit = 0;
+
+    for (var j = 0; j < incoming.length; j++) {
+      if (selectedReferenceFiles.length >= MAX_REFERENCE_FILES) {
+        skippedLimit += incoming.length - j;
+        break;
+      }
+      var file = incoming[j];
+      var id = fileIdentity(file);
+      if (existing[id]) {
+        skippedDup += 1;
+        continue;
+      }
+      selectedReferenceFiles.push(file);
+      existing[id] = true;
+      added += 1;
+    }
+
+    syncReferencesInput();
+    renderReferencePreview();
+    return { added: added, skippedDup: skippedDup, skippedLimit: skippedLimit };
+  }
+
+  function renderReferencePreview() {
+    clearReferencePreviewUrls();
+    if (!referencesPreview) {
+      return;
+    }
+    referencesPreview.innerHTML = "";
+
+    var files = selectedReferenceFiles;
+    if (!files.length) {
+      referencesPreview.hidden = true;
+      return;
+    }
+
+    var countEl = document.createElement("p");
+    countEl.className = "file-preview-count";
+    countEl.textContent =
+      "Избрани: " +
+      files.length +
+      " / " +
+      MAX_REFERENCE_FILES +
+      (files.length === 1 ? " файл" : " файла");
+    referencesPreview.appendChild(countEl);
+
+    var list = document.createElement("ul");
+    list.className = "file-preview-list";
+
+    for (var i = 0; i < files.length; i++) {
+      (function (index, file) {
+        var item = document.createElement("li");
+        item.className = "file-preview-item";
+
+        var removeBtn = document.createElement("button");
+        removeBtn.type = "button";
+        removeBtn.className = "file-preview-remove";
+        removeBtn.setAttribute("aria-label", "Премахни " + (file.name || "файл"));
+        removeBtn.title = "Премахни";
+        removeBtn.textContent = "×";
+        removeBtn.addEventListener("click", function () {
+          removeReferenceAt(index);
+        });
+
+        var thumb = document.createElement("img");
+        thumb.className = "file-preview-thumb";
+        thumb.alt = "";
+        thumb.width = 96;
+        thumb.height = 96;
+
+        if (isAllowedImageFile(file)) {
+          var url = URL.createObjectURL(file);
+          previewObjectUrls.push(url);
+          thumb.src = url;
+        } else {
+          thumb.className += " is-invalid-file";
+          thumb.removeAttribute("src");
+          thumb.alt = "Невалиден файл";
+        }
+
+        var nameEl = document.createElement("span");
+        nameEl.className = "file-preview-name";
+        nameEl.textContent = file.name || "файл";
+        nameEl.title = file.name || "";
+
+        item.appendChild(removeBtn);
+        item.appendChild(thumb);
+        item.appendChild(nameEl);
+        list.appendChild(item);
+      })(i, files[i]);
+    }
+
+    referencesPreview.appendChild(list);
+    referencesPreview.hidden = false;
+  }
+
+  applyDateMin();
 
   form.addEventListener("input", function (event) {
     var field = event.target;
@@ -46,8 +300,58 @@
     }
   });
 
+  form.addEventListener("change", function (event) {
+    var field = event.target;
+    if (field && field.id === "references") {
+      if (skipReferenceChange) {
+        return;
+      }
+      var group = field.closest(".form-group");
+      if (group && group.classList.contains("is-invalid")) {
+        clearError(group);
+      }
+      var incoming = field.files ? Array.prototype.slice.call(field.files, 0) : [];
+      var result = appendReferenceFiles(incoming);
+      if (group && result.skippedLimit > 0) {
+        setError(
+          group,
+          "Достигнат е лимитът от " +
+            MAX_REFERENCE_FILES +
+            " изображения. Част от новите файлове не бяха добавени."
+        );
+      }
+    } else if (field && field.type === "file") {
+      var groupFile = field.closest(".form-group");
+      if (groupFile && groupFile.classList.contains("is-invalid")) {
+        clearError(groupFile);
+      }
+    }
+  });
+
+  if (referencesInput && referencesInput.files && referencesInput.files.length) {
+    appendReferenceFiles(referencesInput.files);
+  }
+
   form.addEventListener("submit", function (event) {
     event.preventDefault();
+    applyDateMin();
+
+    if (!window.KJAuth || !window.KJAuth.isLoggedIn()) {
+      if (window.KJAuth && window.KJAuth.openAuthModal) {
+        window.KJAuth.openAuthModal("login");
+      }
+      var gateMsg = document.getElementById("order-auth-message");
+      if (gateMsg) {
+        gateMsg.innerHTML =
+          'Моля, <button type="button" class="btn-auth btn-auth-solid" data-open-auth="login">влезте</button> или <button type="button" class="btn-auth" data-open-auth="register">се регистрирайте</button>, за да изпратите поръчка.';
+        document.querySelectorAll("#order-auth-gate [data-open-auth]").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            window.KJAuth.openAuthModal(btn.getAttribute("data-open-auth") || "login");
+          });
+        });
+      }
+      return;
+    }
 
     var valid = true;
     var groups = form.querySelectorAll(".form-group, fieldset.requires-choice");
@@ -59,11 +363,15 @@
     var name = form.elements.namedItem("name");
     var email = form.elements.namedItem("email");
     var phone = form.elements.namedItem("phone");
+    var people = form.elements.namedItem("people");
+    var date = form.elements.namedItem("date");
+    var references = form.elements.namedItem("references");
     var topic = form.elements.namedItem("topic");
+    var theme = form.elements.namedItem("theme");
     var message = form.elements.namedItem("message");
-    var age = form.elements.namedItem("age");
-    var website = form.elements.namedItem("website");
     var consent = form.elements.namedItem("consent");
+    var promoInput = document.getElementById("promo-code");
+    var promoGroup = promoInput ? promoInput.closest(".form-group") : null;
 
     if (!name.value || name.value.trim().length < 2) {
       setError(name.closest(".form-group"), "Моля, въведете име с поне 2 символа.");
@@ -75,31 +383,85 @@
       valid = false;
     }
 
-    if (!validatePhone(phone.value.trim())) {
-      setError(phone.closest(".form-group"), "Телефонът съдържа невалидни символи.");
+    if (!phone.value || !phone.value.trim()) {
+      setError(phone.closest(".form-group"), "Моля, въведете телефонен номер.");
+      valid = false;
+    } else if (!validatePhone(phone.value.trim())) {
+      setError(
+        phone.closest(".form-group"),
+        "Телефонът трябва да е 7–20 символа (цифри, интервали, +, -, ())."
+      );
       valid = false;
     }
 
-    if (!topic.value) {
-      setError(topic.closest(".form-group"), "Изберете тема на запитването.");
-      valid = false;
-    }
-
-    if (!message.value || message.value.trim().length < 10) {
-      setError(message.closest(".form-group"), "Съобщението трябва да е поне 10 символа.");
-      valid = false;
-    }
-
-    if (age.value !== "") {
-      var ageNum = Number(age.value);
-      if (isNaN(ageNum) || ageNum < 12 || ageNum > 120) {
-        setError(age.closest(".form-group"), "Възрастта трябва да е между 12 и 120.");
+    if (people && people.value !== "") {
+      var peopleNum = Number(people.value);
+      if (isNaN(peopleNum) || peopleNum < 1 || peopleNum > 20) {
+        setError(people.closest(".form-group"), "Броят хора трябва да е между 1 и 20.");
         valid = false;
       }
     }
 
-    if (website.value && !/^https?:\/\/.+\..+/.test(website.value.trim())) {
-      setError(website.closest(".form-group"), "URL адресът трябва да започва с http:// или https://");
+    if (!date.value) {
+      setError(date.closest(".form-group"), "Моля, изберете желана дата за готовност.");
+      valid = false;
+    } else {
+      var chosen = parseISODate(date.value);
+      var minDate = minReadyDate();
+      if (!chosen) {
+        setError(date.closest(".form-group"), "Невалидна дата.");
+        valid = false;
+      } else if (chosen.getTime() < minDate.getTime()) {
+        setError(
+          date.closest(".form-group"),
+          "Датата трябва да е най-рано " + formatDateISO(minDate) + " (днес + 3 дни)."
+        );
+        valid = false;
+      }
+    }
+
+    if (references && references.files && references.files.length) {
+      var files = references.files;
+      if (files.length > MAX_REFERENCE_FILES) {
+        setError(
+          references.closest(".form-group"),
+          "Можете да качите най-много " + MAX_REFERENCE_FILES + " изображения."
+        );
+        valid = false;
+      } else {
+        var badNames = [];
+        for (var f = 0; f < files.length; f++) {
+          if (!isAllowedImageFile(files[f])) {
+            badNames.push(files[f].name || "файл");
+          }
+        }
+        if (badNames.length) {
+          setError(
+            references.closest(".form-group"),
+            "Позволени са само JPG, PNG, GIF или WebP. Невалидни: " +
+              badNames.slice(0, 3).join(", ") +
+              (badNames.length > 3 ? "…" : "")
+          );
+          valid = false;
+        }
+      }
+    }
+
+    if (!topic.value) {
+      setError(topic.closest(".form-group"), "Изберете вид на поръчката.");
+      valid = false;
+    }
+
+    if (!theme.value || theme.value.trim().length < 5) {
+      setError(theme.closest(".form-group"), "Опишете темата/повода с поне 5 символа.");
+      valid = false;
+    }
+
+    if (message.value && message.value.trim().length > 0 && message.value.trim().length < 10) {
+      setError(
+        message.closest(".form-group"),
+        "Ако попълвате допълнителни детайли, въведете поне 10 символа."
+      );
       valid = false;
     }
 
@@ -115,6 +477,31 @@
       valid = false;
     }
 
+    var promoApplied = false;
+    var promoNote = "";
+    if (promoInput && promoInput.value.trim()) {
+      var promoCheck = window.KJAuth.validatePromoCode(promoInput.value, topic.value);
+      if (!promoCheck.ok) {
+        if (promoGroup) {
+          setError(promoGroup, promoCheck.message);
+        }
+        valid = false;
+      } else if (promoInput.dataset.applied !== window.KJAuth.PROMO_CODE) {
+        if (promoGroup) {
+          setError(promoGroup, "Натиснете „Приложи“, за да потвърдите промо кода преди изпращане.");
+        }
+        valid = false;
+      } else {
+        promoApplied = true;
+        promoNote =
+          " Промо KJ15: " +
+          promoCheck.basePrice +
+          " лв → " +
+          promoCheck.finalPrice +
+          " лв (−15%).";
+      }
+    }
+
     if (!valid) {
       var firstInvalid = form.querySelector(".is-invalid");
       if (firstInvalid) {
@@ -126,10 +513,34 @@
       return;
     }
 
+    if (promoApplied) {
+      window.KJAuth.markPromoUsed();
+    }
+
+    var fileCount =
+      references && references.files ? references.files.length : 0;
     if (success) {
+      success.textContent =
+        "Благодарим! Получихме поръчката ви и ще се свържем скоро." +
+        (fileCount ? " Получени референции: " + fileCount + "." : "") +
+        (promoApplied ? promoNote : "");
       success.classList.add("is-visible");
       success.focus();
     }
     form.reset();
+    applyDateMin();
+    clearReferenceSelection();
+    if (promoInput) {
+      promoInput.dataset.applied = "";
+      delete promoInput.dataset.finalPrice;
+    }
+    var promoResult = document.getElementById("promo-result");
+    if (promoResult) {
+      promoResult.textContent = "";
+      promoResult.classList.remove("is-ok", "is-bad");
+    }
+    if (window.KJAuth.updateAuthUI) {
+      window.KJAuth.updateAuthUI();
+    }
   });
 })();

@@ -3,93 +3,95 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Курсов сайт за карикатури — история, галерия, медии и контактна форма.">
-  <title>Карикатури — Начало</title>
+  <meta name="description" content="K&amp;J Art — портрети, карикатури и спомени по поръчка.">
+  <title>K&amp;J Art — Начало</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <div class="site-parallax" aria-hidden="true">
+    <div class="site-parallax-layer" data-parallax-site></div>
+    <div class="site-parallax-scrim"></div>
+  </div>
   <a class="skip-link" href="#main">Към съдържанието</a>
 
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="index.html">
-        <span class="brand-mark">Карика<span>тури</span></span>
-        <span class="brand-tag">ателие</span>
+        <img class="brand-logo" src="assets/brand/logo-kj-art-final.png" width="1254" height="1254" alt="">
+        <span class="brand-text">
+          <span class="brand-mark">K<span>&amp;</span>J Art</span>
+          <span class="brand-tag">ателие</span>
+        </span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Меню</button>
       <nav class="site-nav" id="primary-nav" aria-label="Главна навигация">
-        <ul>
-          <li><a href="index.html" aria-current="page">Начало</a></li>
-          <li><a href="gallery.html">Галерия</a></li>
-          <li><a href="about.html">За карикатурата</a></li>
-          <li><a href="contact.html">Контакт</a></li>
+                <ul class="nav-bar">
+          <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-toggle is-current" id="nav-pages-btn" aria-expanded="false" aria-controls="nav-pages-menu" aria-haspopup="true">
+              Начало
+              <span class="nav-dropdown-caret" aria-hidden="true"></span>
+            </button>
+            <ul class="nav-dropdown-menu" id="nav-pages-menu" hidden>
+              <li><a href="index.html" aria-current="page">Начало</a></li>
+              <li><a href="gallery.html">Галерия</a></li>
+              <li><a href="about.html">За нас</a></li>
+              <li><a href="contact.html">Контакт</a></li>
+            </ul>
+          </li>
+          <li class="auth-nav-cluster">
+            <ul class="auth-nav">
+              <li class="auth-nav-item" data-auth-guest>
+                <button type="button" class="btn-auth" data-open-auth="login">Вход</button>
+              </li>
+              <li class="auth-nav-item" data-auth-guest>
+                <button type="button" class="btn-auth btn-auth-solid" data-open-auth="register">Регистрация</button>
+              </li>
+              <li class="auth-nav-item" data-auth-user hidden>
+                <span class="auth-chip">Здравей, <strong data-auth-name></strong></span>
+              </li>
+              <li class="auth-nav-item" data-auth-user hidden>
+                <button type="button" class="btn-auth" id="auth-logout">Изход</button>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <section class="hero" aria-label="Начален екран">
-    <img class="hero-media" src="assets/images/hero-cartoon.svg" width="1200" height="700" alt="Илюстрация на художник, който рисува карикатура на бюро">
+  <section class="hero" aria-label="Начален екран K&amp;J Art">
     <div class="hero-content">
-      <p class="hero-brand">Карика<span>тури</span></p>
-      <p class="hero-lead">Линията, която преувеличава истината — хумор, сатира и наблюдателност в едно ателие.</p>
+      <p class="hero-brand">K<span>&amp;</span>J Art</p>
+      <p class="hero-lead">Портрети, карикатури и спомени — превръщаме специалните моменти в усмивки и изкуство.</p>
       <div class="hero-actions">
-        <a class="btn" href="gallery.html">Разгледай галерията</a>
-        <a class="btn btn-ghost" href="contact.html">Изпрати идея</a>
+        <a class="btn" href="gallery.html">Виж поръчките</a>
+        <a class="btn btn-ghost" href="contact.html">Поръчай портрет</a>
       </div>
     </div>
   </section>
 
-  <main id="main" class="page">
+  <main id="main" class="page page-atmosphere">
     <div class="layout-with-aside">
       <div class="main-column">
         <section class="section" aria-labelledby="intro-title">
           <header class="section-head">
             <h1 id="intro-title">Добре дошли в ателието</h1>
-            <p>Този сайт е курсов проект по „Увод в уеб програмирането“ и представя карикатурата като визуален език — от политическа сатира до битови скици.</p>
+            <p>K&amp;J Art е мястото, където линията среща сърцето — портрети и карикатури по поръчка, създадени с внимание към спомена.</p>
           </header>
 
-          <article class="article-card">
-            <h2>Какво е карикатурата?</h2>
+          <article class="article-panel">
+            <h2>Какво рисуваме</h2>
             <figure class="float-figure">
-              <img src="assets/images/portrait-aside.svg" width="400" height="500" alt="Портретна карикатура с подчертани черти">
-              <figcaption>Преувеличението е инструмент, не грешка.</figcaption>
+              <img src="assets/brand/samples-framed.jpg" width="1536" height="2048" alt="Портрети и карикатури от ателието">
+              <figcaption>Портрети и карикатури — готови за подарък.</figcaption>
             </figure>
-            <p>Карикатурата изостря характерни черти, жестове и ситуации, за да каже повече с по-малко линии. Тя може да е нежна, язвителна или документална — но винаги разчита на наблюдателност.</p>
-            <p>В галерията ще откриете примери от няколко жанра: политика, ежедневие, животни и спорт. Всяка творба е учебна илюстрация, създадена за този сайт.</p>
+            <p>От абитуриентски спомени до семеен портрет за рождения ден — всяка поръчка започва с вашата история и завършва с рисунка, която се пази.</p>
+            <p>Работим с реалистични портрети и карикатурен стил. В галерията ще видите реални клиентски примери.</p>
             <p class="inline-meta">
               <span class="meta-icon" aria-hidden="true"></span>
-              <strong>Съвет:</strong> гледайте едновременно формата и идеята — карикатурата живее между тях.
+              <strong>Made with heart</strong> — портрети · карикатури · спомени
             </p>
             <div class="clearfix"></div>
-          </article>
-
-          <article class="article-card">
-            <h2>Звук, движение и мастило</h2>
-            <p>По-долу има кратко видео въведение и джингъл. Анимираното „мастилено петно“ показва как CSS анимацията може да допълни илюстрацията.</p>
-            <div class="anim-row" aria-hidden="true">
-              <span class="ink-blob"></span>
-              <span class="pen-line"></span>
-              <span>линия в движение</span>
-            </div>
-            <div class="media-block">
-              <div>
-                <h3>Видео</h3>
-                <video controls preload="metadata" poster="assets/images/hero-cartoon.svg">
-                  <source src="assets/media/intro-cartoon.mp4" type="video/mp4">
-                  Вашият браузър не поддържа видео елемента.
-                </video>
-              </div>
-              <div>
-                <h3>Звук</h3>
-                <audio controls preload="metadata">
-                  <source src="assets/media/cartoon-jingle.mp3" type="audio/mpeg">
-                  <source src="assets/media/cartoon-jingle.wav" type="audio/wav">
-                  Вашият браузър не поддържа аудио елемента.
-                </audio>
-                <p class="hint">Кратък джингъл — подходящ фон за ателие или презентация.</p>
-              </div>
-            </div>
           </article>
         </section>
       </div>
@@ -97,21 +99,21 @@
       <aside class="side-column" aria-label="Странична информация">
         <div class="side-panel">
           <span class="side-ribbon">ново</span>
-          <h2>Защо карикатури?</h2>
-          <p>Защото една добра скица казва това, което дългият текст често заобикаля.</p>
-          <img src="assets/images/card-politics.svg" width="600" height="450" alt="Скица на везни и политическа фигура">
+          <h2>Защо K&amp;J?</h2>
+          <p>Защото споменът заслужава линия, която се усмихва обратно.</p>
+          <img src="assets/brand/brand-hero.jpg" width="1254" height="1254" alt="K и J — създателките на ателието">
           <ul>
-            <li><a href="about.html">История и техники</a></li>
-            <li><a href="gallery.html">Жанрове в галерията</a></li>
-            <li><a href="contact.html">Форма за идеи</a></li>
+            <li><a href="about.html">За нас и процеса</a></li>
+            <li><a href="gallery.html">Галерия с поръчки</a></li>
+            <li><a href="contact.html">Форма за поръчка</a></li>
           </ul>
         </div>
         <div class="scroll-strip" tabindex="0">
-          <h3>Цитати от ателието</h3>
-          <p>„Карикатурата не лъже — тя преувеличава вече видимото.“</p>
-          <p>„Хуморът е врата; сатирата е ключът.“</p>
-          <p>„Ако линията трепери, понякога това е характерът, не грешката.“</p>
-          <p>„Добрата карикатура се чете за секунди и остава за дни.“</p>
+          <h3>От ателието</h3>
+          <p>„Превръщаме спомените в усмивки и изкуство.“</p>
+          <p>„Думи. Мелодии. Истории.“</p>
+          <p>„Мечтаем. Създаваме. Вдъхновяваме.“</p>
+          <p>„Приятелство за цял живот — и портрет, който остава.“</p>
         </div>
       </aside>
     </div>
@@ -119,21 +121,105 @@
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <div>
-        <strong>Карикатури</strong>
-        <p>Курсов проект — Увод в уеб програмирането, ФМИ.</p>
+      <div class="footer-brand">
+        <img src="assets/brand/logo-kj-art-final.png" width="1254" height="1254" alt="">
+        <div>
+          <strong>K&amp;J Art</strong>
+          <p>Портрети · Карикатури · Спомени</p>
+        </div>
       </div>
       <nav aria-label="Връзки в долния колонтитул">
         <ul>
           <li><a href="gallery.html">Галерия</a></li>
-          <li><a href="about.html">За карикатурата</a></li>
+          <li><a href="about.html">За нас</a></li>
           <li><a href="contact.html">Контакт</a></li>
         </ul>
       </nav>
-      <p class="footer-meta">&copy; <span id="year">2026</span> Курсова работа</p>
+      <p class="footer-meta">&copy; <span id="year">2026</span> K&amp;J Art</p>
     </div>
   </footer>
 
+
+  <div id="auth-overlay" class="auth-overlay" aria-hidden="true">
+    <div class="auth-dialog" role="dialog" aria-modal="true" aria-labelledby="auth-dialog-title">
+      <button type="button" class="auth-close" id="auth-close" aria-label="Затвори">&times;</button>
+      <div class="auth-tabs" role="tablist">
+        <button type="button" id="auth-tab-login" class="is-active" role="tab" aria-selected="true" aria-controls="auth-panel-login">Вход</button>
+        <button type="button" id="auth-tab-register" role="tab" aria-selected="false" aria-controls="auth-panel-register">Регистрация</button>
+      </div>
+
+            <div id="auth-panel-login" class="auth-panel" role="tabpanel" aria-labelledby="auth-tab-login">
+        <h2 id="auth-dialog-title">Вход в K&amp;J Art</h2>
+        <form id="login-form" action="#" method="post" novalidate>
+          <div class="form-group">
+            <label for="login-email">Имейл *</label>
+            <input type="email" id="login-email" name="email" autocomplete="email" required placeholder="ime@example.com">
+            <span class="error-msg" role="alert"></span>
+          </div>
+          <div class="form-group">
+            <label for="login-password">Парола *</label>
+            <input type="password" id="login-password" name="password" autocomplete="current-password" required minlength="6">
+            <span class="error-msg" role="alert"></span>
+          </div>
+          <button class="btn" type="submit">Влез</button>
+        </form>
+      </div>
+
+      <div id="auth-panel-register" class="auth-panel" role="tabpanel" aria-labelledby="auth-tab-register" hidden>
+        <h2>Регистрация</h2>
+        <form id="register-form" action="#" method="post" novalidate>
+          <div class="form-group">
+            <label for="register-name">Име *</label>
+            <input type="text" id="register-name" name="name" autocomplete="name" required minlength="2" placeholder="Вашето име">
+            <span class="error-msg" role="alert"></span>
+          </div>
+          <div class="form-group">
+            <label for="register-email">Имейл *</label>
+            <input type="email" id="register-email" name="email" autocomplete="email" required placeholder="ime@example.com">
+            <span class="error-msg" role="alert"></span>
+          </div>
+          <div class="form-group">
+            <label for="register-password">Парола *</label>
+            <input type="password" id="register-password" name="password" autocomplete="new-password" required minlength="6">
+            <span class="hint">Минимум 6 символа.</span>
+            <span class="error-msg" role="alert"></span>
+          </div>
+          <div class="form-group">
+            <label for="register-password-confirm">Повторете паролата *</label>
+            <input type="password" id="register-password-confirm" name="passwordConfirm" autocomplete="new-password" required minlength="6">
+            <span class="error-msg" role="alert"></span>
+          </div>
+          <button class="btn" type="submit">Създай профил</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="promo-overlay" class="promo-overlay" aria-hidden="true">
+    <div class="promo-dialog" role="dialog" aria-modal="true" aria-labelledby="promo-dialog-title">
+      <h2 id="promo-dialog-title">Вашият промо код</h2>
+      <p>Регистрацията е успешна. За първа поръчка на <strong>карикатура</strong> ползвайте:</p>
+      <div class="promo-code-panel">
+        <label for="promo-code-field">Промо код</label>
+        <div class="promo-code-row">
+          <input type="text" id="promo-code-field" class="promo-code-field" value="KJ15" readonly>
+          <button type="button" class="promo-copy-btn" id="promo-copy-btn" aria-label="Копирай промо кода" title="Копирай">
+            <svg class="promo-copy-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <rect x="9" y="9" width="11" height="11" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/>
+              <path d="M6 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+        <p class="promo-copy-status" id="promo-copy-status" aria-live="polite"></p>
+        <p class="promo-code-banner"><strong id="promo-code-value">KJ15</strong> — <strong>15% отстъпка</strong></p>
+      </div>
+      <p class="hint">Запишете кода. След „Продължи“ ще отворим формата за вход.</p>
+      <button type="button" class="btn" id="promo-continue">Продължи</button>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
