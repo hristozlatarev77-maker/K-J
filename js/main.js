@@ -116,4 +116,60 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll, { passive: true });
   updateBackgroundClarity();
+
+  /* Portfolio slideshow: play when in view; pause when out. Prefer sound. */
+  var slideshow = document.getElementById("portfolio-slideshow");
+  if (slideshow && "IntersectionObserver" in window) {
+    var slideshowWantsPlay = false;
+    var slideshowNeedsUnmute = false;
+
+    function tryPlayWithSound() {
+      slideshow.muted = false;
+      var playPromise = slideshow.play();
+      if (!playPromise || typeof playPromise.then !== "function") {
+        return;
+      }
+      playPromise.then(function () {
+        slideshowNeedsUnmute = false;
+      }).catch(function () {
+        slideshow.muted = true;
+        slideshowNeedsUnmute = true;
+        return slideshow.play().catch(function () {
+          /* Autoplay fully blocked — controls remain for manual play. */
+        });
+      });
+    }
+
+    function unmuteOnGesture() {
+      if (!slideshowNeedsUnmute) {
+        return;
+      }
+      slideshow.muted = false;
+      slideshowNeedsUnmute = false;
+      if (slideshowWantsPlay && slideshow.paused) {
+        slideshow.play().catch(function () {});
+      }
+    }
+
+    document.addEventListener("pointerdown", unmuteOnGesture, { passive: true });
+    document.addEventListener("keydown", unmuteOnGesture);
+
+    var slideshowObserver = new IntersectionObserver(
+      function (entries) {
+        for (var i = 0; i < entries.length; i++) {
+          var entry = entries[i];
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.35) {
+            slideshowWantsPlay = true;
+            tryPlayWithSound();
+          } else {
+            slideshowWantsPlay = false;
+            slideshow.pause();
+          }
+        }
+      },
+      { threshold: [0, 0.35, 0.5] }
+    );
+
+    slideshowObserver.observe(slideshow);
+  }
 })();
