@@ -855,6 +855,10 @@ code {
   margin: 2em 0;
 }
 
+.media-block--video {
+  grid-template-columns: 1fr;
+}
+
 .media-block video,
 .media-block audio {
   width: 100%;
@@ -866,6 +870,28 @@ code {
 .media-block audio {
   padding: 0.75em;
   background: rgba(255, 255, 255, 1.0);
+}
+
+/* Stable 16:9 player box — no shrink when poster → playback / controls */
+.video-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--ink);
+  border: 1px solid rgba(196, 139, 139, 0.5);
+  overflow: hidden;
+}
+
+.video-frame video,
+.video-frame .portfolio-slideshow {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  border: 0;
+  object-fit: contain;
+  background: var(--ink);
 }
 
 @keyframes rise-in {
